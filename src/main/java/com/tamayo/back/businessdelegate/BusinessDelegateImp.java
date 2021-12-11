@@ -131,13 +131,17 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public Specialofferproduct specialofferproductFindById(SpecialofferproductPK id) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = REST_URL + "specialofferproduct/show/" + id;
+		
+		Specialofferproduct specialofferproduct = restTemplate.getForObject(url, Specialofferproduct.class); 
+		
+		return specialofferproduct;
 	}
 
 	@Override
 	public void specialofferproductDelete(Integer id) {
-		// TODO Auto-generated method stub
+		String url = REST_URL + "specialofferproduct/delete/" + id;
+		restTemplate.delete(url);
 		
 	}
 
@@ -147,32 +151,38 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public List<Specialoffer> specialofferFindAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String url = REST_URL + "specialoffer/";
+		Specialoffer[] specialoffer = restTemplate.getForObject(url, Specialoffer[].class);
+		List<Specialoffer> result = Arrays.asList(specialoffer);
+		return result;
 	}
 
 	@Override
 	public void specialofferSave(Specialoffer specialoffer) {
-		// TODO Auto-generated method stub
-		
+		String url = REST_URL + "/specialoffer/save";
+		restTemplate.postForObject(url, specialoffer, Specialoffer.class);
 	}
 
 	@Override
 	public void specialofferEdit(Specialoffer specialoffer) {
-		// TODO Auto-generated method stub
+		String url = REST_URL + "specialoffer/edit";
+		restTemplate.put(url, specialoffer, Specialoffer.class);
 		
 	}
 
 	@Override
 	public Specialoffer specialofferFindById(Specialoffer id) {
-		// TODO Auto-generated method stub
-		return null;
+		String url = REST_URL + "specialoffer/show/" + id;
+		
+		Specialoffer specialoffer = restTemplate.getForObject(url, Specialoffer.class); 
+		
+		return specialoffer;
 	}
 
 	@Override
 	public void specialofferDelete(Integer id) {
-		// TODO Auto-generated method stub
-		
+		String url = REST_URL + "specialoffer/delete/" + id;
+		restTemplate.delete(url);
 	}
 
 }
