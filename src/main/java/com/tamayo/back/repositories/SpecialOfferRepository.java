@@ -1,0 +1,10 @@
+package com.tamayo.back.repositories;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.tamayo.back.model.Specialoffer;
+@Repository
+public interface SpecialOfferRepository extends CrudRepository<Specialoffer, Integer>{
+
+}

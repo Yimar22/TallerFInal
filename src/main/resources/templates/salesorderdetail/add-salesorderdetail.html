@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agregar detalles de ordenes de venta</title>
+  <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous"
+  />
+  <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+          crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="../css/shards.min.css" />
+</head>
+
+<body>
+<form
+        class="container my-5"
+        method="POST"
+        action="#"
+        th:action="@{/salorderdet/add}"
+        th:object="${salorderdet}"
+>
+  <h2>Pon los detalles de las ordenes de ventas</h2>
+  
+  </section>
+  <section class="salesorder">
+    <span>Pedido de venta: </span>
+    <select th:field="*{salesorder}">
+      <option
+              th:each="salord : ${salords}"
+              th:value="${salord.salesorderid}"
+              th:text="${salord.desciption}"
+              th:attrappend="selected=${salorderdet.salesorder != null and salorderdet.salesorder.saleorderid == salord.salesorderid}?'selected'"
+      ></option>
+    </select>
+    <span th:if="${#fields.hasErrors('salesorder')}" th:errors="*{salesorder}" class="text-danger"></span>
+  <br>
+  <label for="carriertrackingnumber">Número de seguimiento del transportista: </label>
+  <input type="text" name="carriertrackingnumber" id="carriertrackingnumber" class="form-control" th:value="${salorderdet.carriertrackingnumber}" />
+  <span th:if="${#fields.hasErrors('carriertrackingnumber')}" th:errors="*{carriertrackingnumber}" class="text-danger"></span>
+  <br>
+  <label for="orderquantity">Cantidad del pedido: </label>
+  <input type="text" name="orderquantity" id="orderquantity" class="form-control" th:value="${salorderdet.orderquantity}" />
+  <span th:if="${#fields.hasErrors('orderquantity')}" th:errors="*{orderquantity}" class="text-danger"></span>
+  <br>
+  </section>
+  <label for="unitprice">Precio unitario: </label>
+  <input type="text" name="unitprice" id="unitprice" class="form-control" th:value="${salorderdet.unitprice}" />
+  <span th:if="${#fields.hasErrors('unitprice')}" th:errors="*{unitprice}" class="text-danger"></span>
+  <br>
+  <label for="unitpricediscount">Precio unitario Descuento: </label>
+  <input type="text" name="unitpricediscount" id="unitpricediscount" class="form-control" th:value="${salorderdet.unitpricediscount}" />
+  <span th:if="${#fields.hasErrors('unitpricediscount')}" th:errors="*{unitpricediscount}" class="text-danger"></span>
+  <br>
+  </section>
+  
+  <div class="row">
+    <div class="col-md-4 mt-3">
+      <input type="submit" name="action" class="btn btn-primary" value="Agregar">
+    </div>
+    <div class="col-md-3 mt-3">
+      <input type="submit" name="action" class="btn btn-secondary" value="Cancelar">
+    </div>
+  </div>
+</form>
+</body>
+</html>
