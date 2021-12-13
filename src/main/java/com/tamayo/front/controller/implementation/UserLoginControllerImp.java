@@ -1,4 +1,4 @@
-package com.tamayo.back.controller.implementation;
+package com.tamayo.front.controller.implementation;
 
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;

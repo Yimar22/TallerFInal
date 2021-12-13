@@ -1,4 +1,4 @@
-package com.tamayo.back.businessdelegate;
+package com.tamayo.front.businessdelegate;
 
 import java.util.List;
 
