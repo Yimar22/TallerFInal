@@ -99,7 +99,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	}
 
 	@Override
-	public void salesOrderDetailDelete(Integer id) {
+	public void salesOrderDetailDelete(Salesorderdetail id) {
 		String url = REST_URL + "salesOrderDetail/delete/" + id;
 		restTemplate.delete(url);
 	}
@@ -139,7 +139,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	}
 
 	@Override
-	public void specialofferproductDelete(Integer id) {
+	public void specialofferproductDelete(Specialofferproduct id) {
 		String url = REST_URL + "specialofferproduct/delete/" + id;
 		restTemplate.delete(url);
 		
@@ -171,7 +171,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	}
 
 	@Override
-	public Specialoffer specialofferFindById(Specialoffer id) {
+	public Specialoffer specialofferFindById(Integer id) {
 		String url = REST_URL + "specialoffer/show/" + id;
 		
 		Specialoffer specialoffer = restTemplate.getForObject(url, Specialoffer.class); 
@@ -180,7 +180,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	}
 
 	@Override
-	public void specialofferDelete(Integer id) {
+	public void specialofferDelete(Specialoffer id) {
 		String url = REST_URL + "specialoffer/delete/" + id;
 		restTemplate.delete(url);
 	}

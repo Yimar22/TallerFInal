@@ -13,82 +13,93 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.back.controller.interfaces.SpecialOfferProductController;
-import com.tamayo.model.Salesorderdetail;
-import com.tamayo.model.Specialofferproduct;
-import com.tamayo.model.SpecialofferproductPK;
-import com.tamayo.services.ProductService;
-import com.tamayo.services.SalesOrderDetailService;
-import com.tamayo.services.SpecialOfferProductService;
+import com.tamayo.back.businessdelegate.BusinessDelegate;
+import com.tamayo.back.model.Salesorderdetail;
+import com.tamayo.back.model.SalesorderdetailPK;
+import com.tamayo.back.model.Specialofferproduct;
+import com.tamayo.back.model.SpecialofferproductPK;
 
 import lombok.extern.java.Log;
 
 @Log
 @Controller
-public class SpecialOfferProductControllerImp implements SpecialOfferProductController{
+public class SpecialOfferProductControllerImp {
 	
-	private ProductService productService;
-	private SpecialOfferProductService specialOfferProductService;
+	private BusinessDelegate businessDelegate;
+
 	
-	public SpecialOfferProductControllerImp(ProductService productService, SpecialOfferProductService specialOfferProductService) {
-		this.productService = productService;
-		this.specialOfferProductService = specialOfferProductService;
+	public SpecialOfferProductControllerImp(BusinessDelegate businessDelegate) {
+		this.businessDelegate = businessDelegate;
 	}
 	
 	@GetMapping("/specioffprod/")
-	@Override
-	public String indexSpecialOfferProduct(Long id, Model model) {
-		return null;
+	public String indexSpecialOfferProduct(Model model) {
+		model.addAttribute("specioffprod", businessDelegate.specialofferproductFindAll());
+		return "specioffprod/index";
 	}	
 	
 	@GetMapping("/specioffprod/add")
 	public String addSpecialOfferProduct(Model model) {
-		model.addAttribute("prod", productService.findAll());
-		model.addAttribute("specioffprod", specialOfferProductService.findAll());
+	//model.addAttribute("prod", businessDelegate.productFindAll());
+		model.addAttribute("specioffprod", new Specialofferproduct());
 		return  "specioffprod/add-specioffprod";
 	}
 	
+	//NOTA: HACER EL VALIDATED
 	@PostMapping("/specioffprod/add")
-	public String saveSpecialOfferProduct(@ModelAttribute("specioffprod") @Validated Specialofferproduct specialOfferProduct, BindingResult bindingResult, 
+	public String saveSpecialOfferProduct(@Validated Specialofferproduct specialOfferProduct, BindingResult bindingResult, 
 			Model model, @RequestParam(value = "action", required = true) String action) {
 		if(!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				model.addAttribute("specioffprod", specialOfferProduct);
-				model.addAttribute("prods", productService.findAll());
+			//	model.addAttribute("specioffprod", specialOfferProduct);
+				model.addAttribute("prods", businessDelegate.productFindAll());
 				return "specioffprod/add-specioffprod";
 			}
-			specialOfferProductService.edit(specialOfferProduct);
+			businessDelegate.specialofferproductSave(specialOfferProduct);
 		}
 		return "redirect:/specioffprod/";
 	}
 	
 	@GetMapping("specioffprod/del{id}")
-	public String deleteSpecialOfferProduct(@PathVariable("id") SpecialofferproductPK id, Model model) {
-		Specialofferproduct sop = specialOfferProductService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid special offer product Id:" + id));
-		specialOfferProductService.delete(sop);
-		model.addAttribute("specioffprods", specialOfferProductService.findAll());
+	public String deleteSpecialOfferProduct(@PathVariable("id") Integer id,@PathVariable("id2") Integer id2, Model model) {
+		SpecialofferproductPK sopPK = new SpecialofferproductPK();
+		sopPK.setProductid(id);
+		sopPK.setProductid(id2);		
+		Specialofferproduct sop = businessDelegate.specialofferproductFindById(sopPK);
+		businessDelegate.specialofferproductDelete(sop);
 		return "specioffprod/update-prod";
 	}
 	
 	@GetMapping("/specioffprod/edit/{id}")
-	public String showUpdateForm(@PathVariable("id") SpecialofferproductPK id, Model model) {
-		Specialofferproduct sop = specialOfferProductService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid  special offer product Id:" + id));
+	public String editSpecialOfferProduct(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2, Model model) {
+		SpecialofferproductPK sopPK = new SpecialofferproductPK();
+		sopPK.setProductid(id1);
+		sopPK.setProductid(id2);		
+		Specialofferproduct sop = businessDelegate.specialofferproductFindById(sopPK);
+		if (sop == null)
+			throw new IllegalArgumentException("Invalid user Id:" + id1
+					);
 		model.addAttribute("specioffprod", sop);
-		model.addAttribute("prods", productService.findAll());
+		model.addAttribute("prods", businessDelegate.productFindAll());
 		return "specioffprod/update-specioffprod";
 	}
 	
+	//NOTA: HACER EL VALIDATED
 	@PostMapping("specioffprod/edit/{id}")
-	public String updateSpecialOfferProduct(@PathVariable("id") SpecialofferproductPK id, @RequestParam(value = "action", required = true) String action,
-			@ModelAttribute("specioffprod") @Validated Specialofferproduct specialOfferProduct, BindingResult bindingResult, Model model) {
+	public String updateSpecialOfferProduct(@PathVariable("id") Integer id,@PathVariable("id2") Integer id2, @RequestParam(value = "action", required = true) String action,
+			@Validated Specialofferproduct specialOfferProduct, BindingResult bindingResult, Model model) {
+		SpecialofferproductPK sopPK = new SpecialofferproductPK();
+		sopPK.setProductid(id);
+		sopPK.setProductid(id2);		
+		Specialofferproduct sop = businessDelegate.specialofferproductFindById(sopPK);
 		if(!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("specioffprod", specialOfferProduct);
-				model.addAttribute("prods", productService.findAll());
+				model.addAttribute("prods", businessDelegate.productFindAll());
 				return "specioffprod/update-specioffprod";
 			}
-			specialOfferProductService.edit(specialOfferProduct);
-			model.addAttribute("specioffprods", specialOfferProductService.findAll());
+			specialOfferProduct.setId(sopPK);
+			businessDelegate.specialofferproductEdit(specialOfferProduct);
 		}
 		return "redirect:/prod/";
 	}

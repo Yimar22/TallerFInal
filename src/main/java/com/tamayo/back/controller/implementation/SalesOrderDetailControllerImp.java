@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.tamayo.back.businessdelegate.BusinessDelegate;
-import com.tamayo.back.controller.interfaces.SalesOrderDetailController;
 import com.tamayo.back.model.Salesorderdetail;
 import com.tamayo.back.model.SalesorderdetailPK;
 
@@ -37,8 +35,8 @@ public class SalesOrderDetailControllerImp{
 	@GetMapping("/saleorderdet/add")
 	public String addSalesOrderDetail(Model model, @ModelAttribute("saleorderdet") Salesorderdetail salesOrderDetail) {
 		model.addAttribute("saleorderdet", new Salesorderdetail());
-		//model.addAttribute("prods", businessDelegate.productFindAll());
-		//model.addAttribute("specioffs", businessDelegate.specialofferFindAll());
+		model.addAttribute("prods", businessDelegate.productFindAll());
+		model.addAttribute("specioffs", businessDelegate.specialofferFindAll());
 		return "saleorderdet/add-saleorderdet";
 	}
 	
@@ -48,10 +46,12 @@ public class SalesOrderDetailControllerImp{
 			@RequestParam(value="action", required=true) String action) {
 		if(!action.equals("Cancel")) {
 			if(result.hasErrors()) {
-				model.addAttribute("saleorderdet", businessDelegate.salesOrderDetailFindAll());
-				//model.addAttribute("prods", businessDelegate.productFindAll());
-				//model.addAttribute("specioffs", businessDelegate.specialofferFindAll());
+				//model.addAttribute("saleorderdet", businessDelegate.salesOrderDetailFindAll());
+				model.addAttribute("prods", businessDelegate.productFindAll());
+				model.addAttribute("specioffs", businessDelegate.specialofferFindAll());
 				return "saleorderdet/add-saleorderdet";
+			}else {
+				businessDelegate.salesOrderDetailSave(salesOrderDetail);
 			}
 		}
 		
@@ -59,36 +59,49 @@ public class SalesOrderDetailControllerImp{
 	}
 	
 	@GetMapping("/saleorderdet/del/{id1}&{id2}")
-	public String deleteSalesOrderDetail(@PathVariable("id") SalesorderdetailPK id, Model model) {
-		Salesorderdetail sod = businessDelegate.salesOrderDetailFindById(id);
-		businessDelegate.salesOrderDetailDelete(sod.getId());
-		model.addAttribute("saleorderdet", businessDelegate.salesOrderDetailFindAll());
+	public String deleteSalesOrderDetail(@PathVariable("id") Integer id,@PathVariable("id2") Integer id2, Model model) {
+		SalesorderdetailPK sodPK = new SalesorderdetailPK();
+		sodPK.setSalesorderid(id);
+		sodPK.setSalesorderdetailid(id2);		
+		Salesorderdetail sod = businessDelegate.salesOrderDetailFindById(sodPK);
+		businessDelegate.salesOrderDetailDelete(sod);
 		return "saleorderdet/index";
 	}
 	
 	@PostMapping("/saleorderdet/edit/{id1}&{id2}")
-	public String showUpdateForm(@PathVariable("id1")long id1, @PathVariable("id2")long id2, Model model) {
-		SalesorderdetailPK id = new SalesorderdetailPK();
-		id.setSalesorderdetailid((int)id1);
-		id.setSalesorderid((int)id2);
-		Salesorderdetail sod = salesOrderDetailService.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid user Id:" + id));
-		model.addAttribute("saleorderdet", new Salesorderdetail());
-		model.addAttribute("prods", productService.findAll());
-		model.addAttribute("specioffs", specialOfferService.findAll());
+	public String editSalesOrderDetail(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2, Model model) {
+		SalesorderdetailPK sodPK = new SalesorderdetailPK();
+		sodPK.setSalesorderid(id1);
+		sodPK.setSalesorderdetailid(id2);		
+		Salesorderdetail sod = businessDelegate.salesOrderDetailFindById(sodPK);
+		if (sod == null)
+			throw new IllegalArgumentException("Invalid user Id:" + id1
+					);
+		model.addAttribute("saleorderdet", sod);
+		model.addAttribute("prods", businessDelegate.productFindAll());
+		model.addAttribute("specioffs", businessDelegate.specialofferFindAll());
 		return "saleorderdet/update-saleorderdet";
 	}
 	
+	//NOTA: HACER EL VALIDATED
 	@PostMapping("/saleorderdet/edit/{id1}&{id1}")
-	public String updateSalesOrderDetail(@PathVariable("id1") long id1, @PathVariable("id2")long id2, @RequestParam(value = "action", required = true)String action, @ModelAttribute("saleorderdet") @Validated Salesorderdetail salesorderdetails, BindingResult bindingResult, Model model) {
+	public String updateSalesOrderDetail(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2, 
+			@RequestParam(value = "action", required = true)String action,
+			@Validated Salesorderdetail salesorderdetails, BindingResult bindingResult, Model model) {
+		SalesorderdetailPK sodPK = new SalesorderdetailPK();
+		sodPK.setSalesorderid(id1);
+		sodPK.setSalesorderdetailid(id2);		
+		
 		if(action != null && !action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				model.addAttribute("saleorderdet", new Salesorderdetail());
-				model.addAttribute("prods", productService.findAll());
-				model.addAttribute("specioffs", specialOfferService.findAll());
+				salesorderdetails.setId(sodPK);
+				model.addAttribute("saleorderdet", salesorderdetails);
+				model.addAttribute("prods", businessDelegate.productFindAll());
+				model.addAttribute("specioffs", businessDelegate.specialofferFindAll());
 				return "saleorderdet/update-saleorderdet";
 			}
-			salesOrderDetailService.editSaleOrderDetail(salesorderdetails);
-			model.addAttribute("saleorderdets", salesOrderDetailService.findAll());
+			salesorderdetails.setId(sodPK);
+			businessDelegate.salesOrderDetailEdit(salesorderdetails);
 		}
 		return "redirect:/saleorderdet/";
 	}

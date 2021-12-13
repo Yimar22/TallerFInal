@@ -40,7 +40,7 @@ public interface BusinessDelegate {
 	
 	public Salesorderdetail salesOrderDetailFindById(SalesorderdetailPK id);
 	
-	public void salesOrderDetailDelete(SalesorderdetailPK id);
+	public void salesOrderDetailDelete(Salesorderdetail id);
 	
 	
 	// ==========================
@@ -55,7 +55,7 @@ public interface BusinessDelegate {
 	
 	public Specialofferproduct specialofferproductFindById(SpecialofferproductPK id);
 	
-	public void specialofferproductDelete(Integer id);
+	public void specialofferproductDelete(Specialofferproduct id);
 	
 	// ==========================
     // Special offer 
@@ -67,7 +67,7 @@ public interface BusinessDelegate {
 	
 	public void specialofferEdit(Specialoffer specialoffer);
 	
-	public Specialoffer specialofferFindById(Specialoffer id);
+	public Specialoffer specialofferFindById(Integer id);
 	
-	public void specialofferDelete(Integer id);
+	public void specialofferDelete(Specialoffer id);
 }
