@@ -2,7 +2,6 @@ package com.tamayo.back.services;
 
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
 
 import com.tamayo.back.model.Productmodel;
 

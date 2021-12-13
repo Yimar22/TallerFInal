@@ -9,10 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.tamayo.back.daos.ProductDao;
 import com.tamayo.back.model.Product;
-import com.tamayo.back.model.Productcategory;
-import com.tamayo.back.model.Productmodel;
-import com.tamayo.back.model.Productsubcategory;
-import com.tamayo.back.model.Unitmeasure;
 import com.tamayo.back.repositories.ProductModelRepository;
 import com.tamayo.back.repositories.ProductRepository;
 import com.tamayo.back.repositories.ProductSubCategoryRepository;
