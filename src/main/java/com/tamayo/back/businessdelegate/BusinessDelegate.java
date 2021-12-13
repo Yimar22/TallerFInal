@@ -40,7 +40,7 @@ public interface BusinessDelegate {
 	
 	public Salesorderdetail salesOrderDetailFindById(SalesorderdetailPK id);
 	
-	public void salesOrderDetailDelete(Integer id);
+	public void salesOrderDetailDelete(SalesorderdetailPK id);
 	
 	
 	// ==========================
