@@ -14,8 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-
-import com.tamayo.TallerPruebas.Taller1YimarTamayoApplication;
+import com.tamayo.Application.Taller1YimarTamayoApplication;
 import com.tamayo.back.daos.ProductDao;
 import com.tamayo.back.model.Product;
 import com.tamayo.back.repositories.ProductModelRepository;

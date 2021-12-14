@@ -21,124 +21,118 @@
 </head>
 
 <body>
-<form
-        class="container my-5"
-        method="POST"
-        action="#"
-        th:action="@{/prod/add}"
-        th:object="prod"
->
-  <h2>Detalles del nuevo producto</h2>
- <label for="name">Nombre: </label>
-  <input type="text" name="name" id="name" class="form-control" th:value="${prod.name}" />
-  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
-  <br>
-  <label for="productnumber">Numero de producto: </label>
-  <input type="text" name="productnumber" id="productnumber" class="form-control" th:value="${prod.productnumber}" />
-  <span th:if="${#fields.hasErrors('productnumber')}" th:errors="*{productnumber}" class="text-danger"></span>
-  <br>
-  <label for="color">Color: </label>
-  <input type="text" name="color" id="color" class="form-control" th:value="${prod.color}" />
-  <span th:if="${#fields.hasErrors('color')}" th:errors="*{color}" class="text-danger"></span>
-  <br>
-  <label for="safetystocklevel">Nivel de stock: </label>
-  <input type="text" name="safetystocklevel" id="safetystocklevel" class="form-control" th:value="${prod.safetystocklevel}" />
-  <span th:if="${#fields.hasErrors('safetystocklevel')}" th:errors="*{safetystocklevel}" class="text-danger"></span>
-  <br>
-  <label for="reorderpoint">Punto de pedido: </label>
-  <input type="text" name="reorderpoint" id="reorderpoint" class="form-control" th:value="${prod.reorderpoint}" />
-  <span th:if="${#fields.hasErrors('reorderpoint')}" th:errors="*{reorderpoint}" class="text-danger"></span>
-  <br>
-  <label for="standartcost">Costo estándar: </label>
-  <input type="text" name="standartcost" id="standartcost" class="form-control" th:value="${prod.standartcost}" />
-  <span th:if="${#fields.hasErrors('standartcost')}" th:errors="*{standartcost}" class="text-danger"></span>
-  <br>
-  <label for="listprice">Precio de venta: </label>
-  <input type="text" name="listprice" id="listprice" class="form-control" th:value="${prod.listprice}" />
-  <span th:if="${#fields.hasErrors('listprice')}" th:errors="*{listprice}" class="text-danger"></span>
-  <br>
-   <section class="unitmeasure1">
-    <span>Unidad de medida: </span>
-    <select th:field="*{unitmeasure1}">
-      <option
-              th:each="unitme1 : ${unitme1s}"
-              th:value="${unitme1.unitmeasurecode}"
-              th:text="${unitme1.name}"
-              th:attrappend="selected=${prod.unitmeasure1 != null and prod.unitmeasure1.unitmeasurecode == unitme1.unitmeasurecode}?'selected'"
-      ></option>
-    </select>
-    <span th:if="${#fields.hasErrors('unitmeasure1')}" th:errors="*{unitmeasure1}" class="text-danger"></span>
-  <br>
-  <label for="size">Tamaño: </label>
-  <input type="text" name="size" id="size" class="form-control" th:value="${prod.size}" />
-  <span th:if="${#fields.hasErrors('size')}" th:errors="*{size}" class="text-danger"></span>
-  <br>
- <section class="unitmeasure2">
-    <span>Unidad de medida: </span>
-    <select th:field="*{unitmeasure2}">
-      <option
-              th:each="unitme2 : ${unitme2s}"
-              th:value="${unitme2.unitmeasurecode}"
-              th:text="${unitme2.name}"
-              th:attrappend="selected=${prod.unitmeasure2 != null and prod.unitmeasure2.unitmeasurecode == unitme2.unitmeasurecode}?'selected'"
-      ></option>
-    </select>
-    <span th:if="${#fields.hasErrors('unitmeasure2')}" th:errors="*{unitmeasure2}" class="text-danger"></span>
-  <br>
-  </section>
-  <label for="weight">Peso: </label>
-  <input type="text" name="weight" id="weight" class="form-control" th:value="${prod.weight}" />
-  <span th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="text-danger"></span>
-  <br>
-  
-  <label for="daystomanufacture">Dias de manufactura: </label>
-  <input type="text" name="daystomanufacture" id="daystomanufacture" class="form-control" th:value="${prod.daystomanufacture}" />
-  <span th:if="${#fields.hasErrors('daystomanufacture')}" th:errors="*{daystomanufacture}" class="text-danger"></span>
-  <br>
-  <label for="productline">Línea de productos: </label>
-  <input type="text" name="productline" id="productline" class="form-control" th:value="${prod.productline}" />
-  <span th:if="${#fields.hasErrors('productline')}" th:errors="*{productline}" class="text-danger"></span>
-  <br>
-  <label for="class">Clase: </label>
-  <input type="text" name="class" id="class" class="form-control" th:value="${prod.class}" />
-  <span th:if="${#fields.hasErrors('class')}" th:errors="*{class}" class="text-danger"></span>
-  <br>
-  <label for="style">Estilo: </label>
-  <input type="text" name="style" id="style" class="form-control" th:value="${prod.style}" />
-  <span th:if="${#fields.hasErrors('style')}" th:errors="*{style}" class="text-danger"></span>
-  <br>
-  <section class="productsubcategory">
-    <span>Subcategoria: </span>
-    <select th:field="*{productsubcategory}">
-      <option
-              th:each="prodsubcat : ${prodsubcats}"
-              th:value="${prodsubcat.productsubcategoryid}"
-              th:text="${prodsubcat.name}"
-              th:attrappend="selected=${prod.productsubcategory != null and prod.productsubcategory.productsubcategoryid == prodsubcat.productsubcategoryid}?'selected'"
-      ></option>
-    </select>
-    <span th:if="${#fields.hasErrors('productsubcategory')}" th:errors="*{productsubcategory}" class="text-danger"></span>
-  <br>
- <section class="productmodel">
-    <span>Product Model: </span>
-    <select th:field="*{productmodel}">
-      <option
-              th:each="prodmod : ${prodmods}"
-              th:value="${prodmod.productmodelid}"
-              th:text="${prodmod.name}"
-              th:attrappend="selected=${prod.productmodel != null and prod.productmodel.productmodelid == prodmod.productmodelid}?'selected'"
-      ></option>
-    </select>
-    <span th:if="${#fields.hasErrors('productmodel')}" th:errors="*{productmodel}" class="text-danger"></span>
-  <br>
-  <div class="row">
-    <div class="col-md-4 mt-3">
-      <input type="submit" name="action" class="btn btn-primary" value="Add">
-    </div>
-    <div class="col-md-3 mt-3">
-      <input type="submit" name="action" class="btn btn-secondary" value="Cancel">
-    </div>
-  </div>
-</form>
+<div class="container my-5">
+		<h2 class="mb-5">Nuevo Producto</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="#" th:action="@{/products/add}" th:object="${product}" method="post">
+					
+						<div class="row">
+						<div class="form-group col-md-6">
+							<label 	for="name" class="col-form-label">Nombre</label> 
+							<input 	type="text" th:field="*{name}"		class="form-control" 
+									id="name"	placeholder="Doritos" 	th:value="${product.name}"> 
+							<span	th:if="${#fields.hasErrors('name')}"th:errors="*{name}"
+									class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="productnumber" class="col-form-label">Numero de producto</label> <input
+								type="number" th:field="*{productnumber}" class="form-control" id="productnumber"
+								placeholder="526536"th:value="${product.productnumber}"> <span
+								th:if="${#fields.hasErrors('productnumber')}" th:errors="*{productnumber}"
+								class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="daystomanufacture" class="col-form-label">Dias de manufactura</label>
+							<input type="number" th:field="*{daystomanufacture}" class="form-control"	id="daystomanufacture"
+								placeholder="1,2,3...etc"th:value="${product.daystomanufacture}"> <span
+								th:if="${#fields.hasErrors('daystomanufacture')}" th:errors="*{daystomanufacture}"
+								class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="sellstartdate" class="col-form-label">Fecha inicio venta</label>
+							<input type="date" th:field="*{sellstartdate}" class="form-control"
+								id="sellstartdate" placeholder="xx/xx/xxxx"th:value="${product.sellstartdate}"> <span
+								th:if="${#fields.hasErrors('sellstartdate')}"
+								th:errors="*{sellstartdate}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="sellenddate" class="col-form-label">Fecha fin venta</label>
+							<input type="date" th:field="*{sellenddate}" class="form-control"
+								id="sellenddate" placeholder="xx/xx/xxxx"th:value="${product.sellenddate}"> <span
+								th:if="${#fields.hasErrors('sellenddate')}"
+								th:errors="*{sellenddate}" class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label 	for="size" class="col-form-label">Tamaño</label> 
+							<input 	type="text" th:field="*{size}"	class="form-control" 
+									id="size"	placeholder="5" 	th:value="${product.size}"> 
+							<span	th:if="${#fields.hasErrors('size')}"th:errors="*{size}"
+									class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="unitmeasure1" class="col-form-label">Unidad de medida de tamaño</label> <select
+								class="form-control-range" th:field="*{unitmeasure1}">
+								<!-- Aqui sucede la magia --> 
+								<option th:each="unitmeasure1 : ${unitmeasure1s}" th:value="${unitmeasure1.unitmeasurecode}"
+									class="form-control" th:text="${unitmeasure1.name}"
+									th:selected="${product.unitmeasure1=unitmeasure1}"></option>
+							</select>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="weight" class="col-form-label">Peso</label> <input
+								type="text" th:field="*{weight}" class="form-control" id="weight"
+								placeholder="3"th:value="${product.weight}"> <span
+								th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"
+								class="text-danger"></span>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="unitmeasure2" class="col-form-label">Unidad de medida del peso</label> <select
+								class="form-control-range" th:field="*{unitmeasure2}">
+								<!-- Aqui sucede la magia --> 
+								<option th:each="unitmeasure2 : ${unitmeasure2s}" th:value="${unitmeasure2.unitmeasurecode}"
+									class="form-control" th:text="${unitmeasure2.name}"
+									th:selected="${product.unitmeasure2=unitmeasure2}"></option>
+							</select>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="productcategory" class="col-form-label">Categoria</label> <select
+								class="form-control-range" th:field="*{productcategory}">
+								<!-- Aqui sucede la magia --> 
+								<option th:each="productcategory : ${productcategorys}" th:value="${product.productsubcategory.productcategory.productcategoryid}"
+									class="form-control" th:text="${productcategory.name}"
+									th:selected="${product.productsubcategory.productcategory=productcategory}"></option>
+							</select>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="productsubcategory" class="col-form-label">Subcategoria</label> <select
+								class="form-control-range" th:field="*{productsubcategory}">
+								<!-- Aqui sucede la magia --> 
+								<option th:each="productcategory : ${productsubcategorys}" th:value="${productsubcategory.productsubcategoryid}"
+									class="form-control" th:text="${productsubcategory.name}"
+									th:selected="${product.productsubcategory=productsubcategory}"></option>
+							</select>
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col-md-4 mt-3">
+							<input type="submit" name="action" class="btn btn-primary" value="Añadir">
+						</div>
+						<div class="col-md-3 mt-3">
+							<input type="submit" name="action" class="btn btn-secondary" value="Cancelar">
+						</div>
+					</div>
+				</form>
 </body>
 </html>
