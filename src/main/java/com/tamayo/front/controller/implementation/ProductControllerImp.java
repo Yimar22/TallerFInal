@@ -1,4 +1,4 @@
-package com.tamayo.back.controller.implementation;
+package com.tamayo.front.controller.implementation;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.tamayo.back.businessdelegate.BusinessDelegate;
-import com.tamayo.back.controller.interfaces.ProductController;
+
 import com.tamayo.back.model.Product;
+import com.tamayo.front.businessdelegate.BusinessDelegate;
 
 
 
@@ -60,8 +60,9 @@ public class ProductControllerImp {
          //       model.addAttribute("unitme1s", unitMeasureService.findAll() );
          //       model.addAttribute("unitme2s", unitMeasureService.findAll() );
                 return "prod/add-prod";
-            }
+            }else {
             businessDelegate.productSave(product);
+           }
         }
         return "redirect:/prod/";
         
@@ -75,7 +76,7 @@ public class ProductControllerImp {
 	}
 	
 	@GetMapping("/prod/edit/{id}")
-	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+	public String editProduct(@PathVariable("id") Integer id, Model model) {
 		Product prod = businessDelegate.productFindById(id);
 		if (prod == null) 
 			throw new IllegalArgumentException("Invalid prod Id:" + id);
