@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tamayo.back.model.Salesorderdetail;
 import com.tamayo.back.model.SalesorderdetailPK;
 import com.tamayo.front.businessdelegate.BusinessDelegate;
+import com.tamayo.front.controller.interfaces.SalesOrderDetailController;
 
 
 @Controller
-public class SalesOrderDetailControllerImp{
+public class SalesOrderDetailControllerImp implements SalesOrderDetailController{
 	private BusinessDelegate businessDelegate;
 	
 	@Autowired
@@ -34,7 +35,7 @@ public class SalesOrderDetailControllerImp{
 	}
 	
 	@GetMapping("/saleorderdet/add")
-	public String addSalesOrderDetail(Model model, @ModelAttribute("saleorderdet") Salesorderdetail salesOrderDetail) {
+	public String addSalesOrderDetail(Model model) {
 		model.addAttribute("saleorderdet", new Salesorderdetail());
 		model.addAttribute("prods", businessDelegate.productFindAll());
 		model.addAttribute("specioffs", businessDelegate.specialofferFindAll());

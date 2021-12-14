@@ -18,12 +18,13 @@ import com.tamayo.back.model.SalesorderdetailPK;
 import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
 import com.tamayo.front.businessdelegate.BusinessDelegate;
+import com.tamayo.front.controller.interfaces.SpecialOfferProductController;
 
 import lombok.extern.java.Log;
 
 @Log
 @Controller
-public class SpecialOfferProductControllerImp {
+public class SpecialOfferProductControllerImp implements SpecialOfferProductController{
 	
 	private BusinessDelegate businessDelegate;
 

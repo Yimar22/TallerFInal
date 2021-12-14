@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tamayo.back.model.Specialoffer;
 import com.tamayo.front.businessdelegate.BusinessDelegate;
+import com.tamayo.front.controller.interfaces.SpecialOfferController;
 
 @Controller
-public class SpecialOfferControllerImp  {
+public class SpecialOfferControllerImp  implements SpecialOfferController{
 	
 	private BusinessDelegate businessDelegate;
 
