@@ -8,6 +8,7 @@ import com.tamayo.back.model.SalesorderdetailPK;
 import com.tamayo.back.model.Specialoffer;
 import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
+import com.tamayo.back.model.Workorder;
 
 
 
@@ -70,4 +71,16 @@ public interface BusinessDelegate {
 	public Specialoffer specialofferFindById(Integer id);
 	
 	public void specialofferDelete(Specialoffer id);
+	
+	// ==========================
+	// Work order
+	// ==========================
+	
+	Workorder workorder_get(Integer id);
+	List<Workorder> workorder_findAllByProduct(Integer id);
+	List<Workorder> workorder_findAll();
+	Workorder workorder_save(Workorder workorder);
+	void workorder_delete(Workorder workorder);
+	Workorder workorder_findById(Integer id);
+	void editWorkorder(Workorder workorder);
 }

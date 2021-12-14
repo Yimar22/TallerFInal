@@ -3,6 +3,8 @@ package com.tamayo.front.businessdelegate;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.tamayo.back.model.Product;
@@ -11,10 +13,13 @@ import com.tamayo.back.model.SalesorderdetailPK;
 import com.tamayo.back.model.Specialoffer;
 import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
+import com.tamayo.back.model.Workorder;
 
+@Component
 public class BusinessDelegateImp implements BusinessDelegate {
 	
 	public static final String REST_URL = "http://localhost:8080/api";
+	private final static String WORK_ORDER_URL = REST_URL+"/workorders/";
 
 	private RestTemplate restTemplate;
 	
@@ -184,5 +189,60 @@ public class BusinessDelegateImp implements BusinessDelegate {
 		String url = REST_URL + "specialoffer/delete/" + id;
 		restTemplate.delete(url);
 	}
+	
+	//------------------------------------------------------------------
+	//							Workorder
+	//------------------------------------------------------------------
+
+	@Override
+	public Workorder workorder_get(Integer id) {
+		// TODO Auto-generated method stub
+		return restTemplate.getForObject(WORK_ORDER_URL+id, Workorder.class);
+	}
+
+
+	@Override
+	public List<Workorder> workorder_findAllByProduct(Integer id) {
+		Workorder[] array = restTemplate.getForObject(WORK_ORDER_URL+"search/findAllByProduct?product="+id, Workorder[].class);
+		return Arrays.asList(array);
+	}
+
+
+	@Override
+	public List<Workorder> workorder_findAll() {
+		Workorder[] array = restTemplate.getForObject(WORK_ORDER_URL, Workorder[].class);
+		return Arrays.asList(array);
+	}
+
+
+	@Override
+	public Workorder workorder_save(Workorder workorder) {
+		HttpEntity<Workorder> request = new HttpEntity<>(workorder);
+		return restTemplate.postForObject(WORK_ORDER_URL, request, Workorder.class);
+	}
+
+
+	@Override
+	public void workorder_delete(Workorder workorder) {
+		restTemplate.delete(WORK_ORDER_URL+workorder.getWorkorderid());
+		
+	}
+
+
+	@Override
+	public Workorder workorder_findById(Integer id) {
+		return restTemplate.getForObject(WORK_ORDER_URL+id, Workorder.class);
+	}
+
+
+	@Override
+	public void editWorkorder(Workorder workorder) {
+		restTemplate.put(WORK_ORDER_URL, workorder, Workorder.class);
+		
+	}
+	
+
+	
+	
 
 }
