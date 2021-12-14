@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.model.Product;
+import com.tamayo.back.model.Product;
+
 
 
 

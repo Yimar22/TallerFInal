@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.model.Specialoffer;
+import com.tamayo.back.model.Specialoffer;
+
 
 public interface SpecialOfferController {
 	public String indexSpecialOffer(@RequestParam(required = false, value = "id") Long id, Model model);

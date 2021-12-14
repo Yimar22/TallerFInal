@@ -7,8 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.model.Salesorderdetail;
-import com.tamayo.model.SpecialofferproductPK;
+import com.tamayo.back.model.Salesorderdetail;
+import com.tamayo.back.model.SpecialofferproductPK;
+
 
 public interface SalesOrderDetailController {
 	public String indexSalesOrderDetail(@RequestParam(required = false, value = "id") SpecialofferproductPK id, Model model);

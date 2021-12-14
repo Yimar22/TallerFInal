@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<div th:switch="${prods.isEmpty()}" class="container my-5">
+	<div th:switch="${workorders.isEmpty()}" class="container my-5">
 		<div class="row">
 			<div class="col-md-10">
 				<h2 th:case="true">Ninguna orden de trabajo ha sido registrado aun!</h2>
@@ -37,19 +37,19 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="workor : ${workords}">
-								<td th:text="${workor.workorderid}"></td>
-								<td><a th:text="${workor.productid}" th:href="@{/prod/?id={id}(id=${workor.product.productid})}"></a></td>
-								<td th:text="${workor.orderqty}"></td>
-								<td th:text="${workor.scrappedqty}"></td>
-								<td th:text="${workor.startdate}"></td>
-								<td th:text="${workor.enddate}"></td>
-								<td th:text="${workor.duedate}"></td>
-								<td th:text="${workor.modifieddate}"></td>								
-								<td><a th:text="${workor.scrapreasonid}" th:href="@{/scraprsn/?id={id}(id=${workor.scrapreason.scrapedreasonid})}"></a></td>
-								<td><a th:href="@{/prod/edit/{id}(id=${prod.productid})}"
+							<tr th:each="workorder : ${workorders}">
+								<td th:text="${workorder.workorderid}"></td>
+								<td><a th:text="${workorder.productid}" th:href="@{/prod/?id={id}(id=${workor.product.productid})}"></a></td>
+								<td th:text="${workorder.orderqty}"></td>
+								<td th:text="${workorder.scrappedqty}"></td>
+								<td th:text="${workorder.startdate}"></td>
+								<td th:text="${workorder.enddate}"></td>
+								<td th:text="${workorder.duedate}"></td>
+								<td th:text="${workorder.modifieddate}"></td>								
+								<td><a th:text="${workorder.scrapreasonid}" th:href="@{/scraprsn/?id={id}(id=${workorder.scrapreason.scrapedreasonid})}"></a></td>
+								<td><a th:href="@{/workorder/edit/{id}(id=${workorder.workorderid})}"
 									class="btn btn-primary"><i class="fas fa-calendar ml-2"></i></a></td>
-								<td><a th:href="@{/prod/del/{id}(id=${prod.productid})}"
+								<td><a th:href="@{/workorder/del/{id}(id=${workorder.workorderid})}"
 									class="btn btn-primary"><i class="fas fa-trash ml-2"x></i></a></td>
 						</tbody>
 					</table>
