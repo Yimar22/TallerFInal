@@ -12,15 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tamayo.back.model.Product;
 import com.tamayo.front.businessdelegate.BusinessDelegate;
+import com.tamayo.front.controller.interfaces.ProductController;
 
 
 
 @Controller
-public class ProductControllerImp {
+@RequestMapping("/front/Product")
+public class ProductControllerImp implements ProductController{
 	
 	private BusinessDelegate businessDelegate;
 
@@ -30,15 +33,15 @@ public class ProductControllerImp {
 	}
 		
 	@GetMapping("/prod/")
-	public String indexProduct(Model model) throws IOException {
+	public String indexProduct(Model model) {
 		model.addAttribute("prods", businessDelegate.productFindAll());
 		return "prod/index";
 	}
 	
 	@GetMapping("/prod/add")
-    public String addProduct(Model model, @ModelAttribute("prod") Product product) {
+    public String addProduct(Model model) {
         model.addAttribute("prod", new Product());
-		model.addAttribute("prod", businessDelegate.productFindAll());
+		//model.addAttribute("prod", businessDelegate.productFindAll());
 		//model.addAttribute("prodsubcats", productSubcategoryService.findAll() );
 	    //model.addAttribute("prodmods", productModelService.findAll() );
 	    //model.addAttribute("unitme1s", unitMeasureService.findAll() );
