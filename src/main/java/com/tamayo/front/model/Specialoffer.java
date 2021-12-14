@@ -29,23 +29,9 @@ public class Specialoffer implements Serializable {
 
 	private String category;
 
-	private String description;
-
 	private BigDecimal discountpct;
 
-	private Timestamp enddate;
-
-	private Integer maxqty;
-
-	private Integer minqty;
-
 	private Timestamp modifieddate;
-
-	private Integer rowguid;
-
-	private Timestamp startdate;
-
-	private String type;
 
 	// bi-directional many-to-one association to Specialofferproduct
 	@OneToMany(mappedBy = "specialoffer")
@@ -65,32 +51,8 @@ public class Specialoffer implements Serializable {
 		return this.category;
 	}
 
-	public String getDescription() {
-		return this.description;
-	}
-
-	public BigDecimal getDiscountpct() {
-		return this.discountpct;
-	}
-
-	public Timestamp getEnddate() {
-		return this.enddate;
-	}
-
-	public Integer getMaxqty() {
-		return this.maxqty;
-	}
-
-	public Integer getMinqty() {
-		return this.minqty;
-	}
-
 	public Timestamp getModifieddate() {
 		return this.modifieddate;
-	}
-
-	public Integer getRowguid() {
-		return this.rowguid;
 	}
 
 	public Integer getSpecialofferid() {
@@ -99,14 +61,6 @@ public class Specialoffer implements Serializable {
 
 	public List<Specialofferproduct> getSpecialofferproducts() {
 		return this.specialofferproducts;
-	}
-
-	public Timestamp getStartdate() {
-		return this.startdate;
-	}
-
-	public String getType() {
-		return this.type;
 	}
 
 	public Specialofferproduct removeSpecialofferproduct(Specialofferproduct specialofferproduct) {
@@ -120,32 +74,12 @@ public class Specialoffer implements Serializable {
 		this.category = category;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public void setDiscountpct(BigDecimal discountpct) {
 		this.discountpct = discountpct;
 	}
 
-	public void setEnddate(Timestamp enddate) {
-		this.enddate = enddate;
-	}
-
-	public void setMaxqty(Integer maxqty) {
-		this.maxqty = maxqty;
-	}
-
-	public void setMinqty(Integer minqty) {
-		this.minqty = minqty;
-	}
-
 	public void setModifieddate(Timestamp modifieddate) {
 		this.modifieddate = modifieddate;
-	}
-
-	public void setRowguid(Integer rowguid) {
-		this.rowguid = rowguid;
 	}
 
 	public void setSpecialofferid(Integer specialofferid) {
@@ -154,14 +88,6 @@ public class Specialoffer implements Serializable {
 
 	public void setSpecialofferproducts(List<Specialofferproduct> specialofferproducts) {
 		this.specialofferproducts = specialofferproducts;
-	}
-
-	public void setStartdate(Timestamp startdate) {
-		this.startdate = startdate;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 }

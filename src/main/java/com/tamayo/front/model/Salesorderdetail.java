@@ -20,9 +20,11 @@ import javax.persistence.NamedQuery;
 public class Salesorderdetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
+	/*@EmbeddedId
 	private SalesorderdetailPK id;
-
+	*/
+	private Integer id;
+	
 	private String carriertrackingnumber;
 
 	private Timestamp modifieddate;
@@ -34,11 +36,6 @@ public class Salesorderdetail implements Serializable {
 	private BigDecimal unitprice;
 
 	private BigDecimal unitpricediscount;
-
-	// bi-directional many-to-one association to Salesorderheader
-	@ManyToOne
-	@JoinColumn(name = "salesorderid", insertable = false, updatable = false)
-	private Salesorderheader salesorderheader;
 
 	// bi-directional many-to-one association to Specialofferproduct
 	@ManyToOne
@@ -54,7 +51,7 @@ public class Salesorderdetail implements Serializable {
 		return this.carriertrackingnumber;
 	}
 
-	public SalesorderdetailPK getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -68,10 +65,6 @@ public class Salesorderdetail implements Serializable {
 
 	public Integer getRowguid() {
 		return this.rowguid;
-	}
-
-	public Salesorderheader getSalesorderheader() {
-		return this.salesorderheader;
 	}
 
 	public Specialofferproduct getSpecialofferproduct() {
@@ -90,7 +83,7 @@ public class Salesorderdetail implements Serializable {
 		this.carriertrackingnumber = carriertrackingnumber;
 	}
 
-	public void setId(SalesorderdetailPK id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -104,10 +97,6 @@ public class Salesorderdetail implements Serializable {
 
 	public void setRowguid(Integer rowguid) {
 		this.rowguid = rowguid;
-	}
-
-	public void setSalesorderheader(Salesorderheader salesorderheader) {
-		this.salesorderheader = salesorderheader;
 	}
 
 	public void setSpecialofferproduct(Specialofferproduct specialofferproduct) {

@@ -1,4 +1,4 @@
-package com.tamayo.back.controller.interfaces;
+package com.tamayo.front.controller.interfaces;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
