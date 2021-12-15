@@ -5,11 +5,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
+
 import com.tamayo.back.model.Businessentity;
 import com.tamayo.back.model.Product;
 import com.tamayo.back.model.Salesorderdetail;
 import com.tamayo.back.model.SalesorderdetailPK;
 
+@Repository
+@Scope("singleton")
 public class SalesorderdetailDaoImpl implements SalesorderdetailDao{
 	
 	@PersistenceContext

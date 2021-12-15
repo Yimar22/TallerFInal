@@ -14,7 +14,7 @@ public interface SpecialOfferProductService {
 
 	Iterable<Specialofferproduct> findAll();
 
-	Optional<Specialofferproduct> findById(SpecialofferproductPK id);
+	Specialofferproduct findById(SpecialofferproductPK id);
 
 	void delete(Specialofferproduct specioffprod);
 	

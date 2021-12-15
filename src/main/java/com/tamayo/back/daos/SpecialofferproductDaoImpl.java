@@ -5,28 +5,33 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
+
 import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
 
+@Repository
+@Scope("singleton")
 public class SpecialofferproductDaoImpl implements SpecialofferproductDao{
 	@PersistenceContext
 	private EntityManager em;
 	
 	@Override
-	public void Save(Specialofferproduct entity) {
+	public void save(Specialofferproduct entity) {
 		em.persist(entity);
 		
 	}
 
 	@Override
-	public void Delete(Specialofferproduct entity) {
+	public void delete(Specialofferproduct entity) {
 		Specialofferproduct attachedEntity = em.merge(entity);
 		em.remove(attachedEntity);
 		
 	}
 
 	@Override
-	public void Edit(Specialofferproduct entity) {
+	public void edit(Specialofferproduct entity) {
 		em.merge(entity);
 		
 	}

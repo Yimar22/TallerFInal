@@ -39,7 +39,7 @@ public class SpecialOfferProductServiceImp implements SpecialOfferProductService
 		}
 		
 		specialofferproduct = sopr.save(specialofferproduct);
-		specialOfferProductDao.Save(specialofferproduct);
+		specialOfferProductDao.save(specialofferproduct);
 		return specialofferproduct;		
 	}
 
@@ -61,7 +61,7 @@ public class SpecialOfferProductServiceImp implements SpecialOfferProductService
 		}
 		
 	specialofferproduct.setSpecialoffer(specialofferproduct.getSpecialoffer());
-	specialOfferProductDao.Save(specialofferproduct);
+	specialOfferProductDao.edit(specialofferproduct);
 		return sop;
 		
 	}
@@ -73,17 +73,17 @@ public class SpecialOfferProductServiceImp implements SpecialOfferProductService
 	
 	@Override
 	public Iterable<Specialofferproduct> findAll() {
-		return sopr.findAll();
+		return specialOfferProductDao.findAll();
 	}
 	
 	@Override
-	public Optional<Specialofferproduct> findById(SpecialofferproductPK id) {
-		return sopr.findById(id);
+	public Specialofferproduct findById(SpecialofferproductPK id) {
+		return specialOfferProductDao.findById(id);
 	}
 	
 	@Override
 	public void delete(Specialofferproduct specioffprod) {
-		sopr.delete(specioffprod);
+		specialOfferProductDao.delete(specioffprod);
 	}
 
 	

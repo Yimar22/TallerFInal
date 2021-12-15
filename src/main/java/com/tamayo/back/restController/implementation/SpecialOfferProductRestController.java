@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
 import com.tamayo.back.services.SpecialOfferProductService;
 
 
-
+@RestController
+@RequestMapping("/api-rest/specioffprod")
 public class SpecialOfferProductRestController {
 	
 	private SpecialOfferProductService sopService;
@@ -47,7 +50,7 @@ public class SpecialOfferProductRestController {
 	}
 	
 	@GetMapping("/specioffprod/")
-	public 	Optional<Specialofferproduct> findByIdSOD(@PathVariable("id") SpecialofferproductPK id) {
+	public 	Specialofferproduct findByIdSOD(@PathVariable("id") SpecialofferproductPK id) {
 		return sopService.findById(id);
 	}
 }

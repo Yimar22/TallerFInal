@@ -7,9 +7,9 @@ import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
 
 public interface SpecialofferproductDao {
-	public void Save(Specialofferproduct entity);
-	public void Delete(Specialofferproduct entity);
-	public void Edit(Specialofferproduct entity);
+	public void save(Specialofferproduct entity);
+	public void delete(Specialofferproduct entity);
+	public void edit(Specialofferproduct entity);
 	public Specialofferproduct findById(SpecialofferproductPK id);
 	public List<Specialofferproduct> findAll();
 }

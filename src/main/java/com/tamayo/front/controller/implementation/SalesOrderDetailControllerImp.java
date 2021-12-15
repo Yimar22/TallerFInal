@@ -96,13 +96,13 @@ public class SalesOrderDetailControllerImp implements SalesOrderDetailController
 		
 		if(action != null && !action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				salesorderdetails.setId(sodPK);
+				salesorderdetails.setId(id2);
 				model.addAttribute("saleorderdet", salesorderdetails);
 				model.addAttribute("prods", businessDelegate.productFindAll());
 				model.addAttribute("specioffs", businessDelegate.specialofferFindAll());
 				return "saleorderdet/update-saleorderdet";
 			}
-			salesorderdetails.setId(sodPK);
+			salesorderdetails.setId(id2);
 			businessDelegate.salesOrderDetailEdit(salesorderdetails);
 		}
 		return "redirect:/saleorderdet/";

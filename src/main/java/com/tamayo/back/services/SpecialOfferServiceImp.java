@@ -37,7 +37,7 @@ public class SpecialOfferServiceImp implements SpecialOfferService{
 		boolean result = specialoffer.getCategory() != null && specialoffer.getDiscountpct().compareTo(BigDecimal.ZERO) > 0 && specialoffer.getModifieddate().equals(new Timestamp(System.currentTimeMillis()));
 		if(!result) return null;
 		specialoffer = sor.save(specialoffer);
-		specialofferDao.Save(specialoffer);
+		specialofferDao.save(specialoffer);
 		return specialoffer;
 	}
 
@@ -66,7 +66,7 @@ public class SpecialOfferServiceImp implements SpecialOfferService{
 			throw new RuntimeException();
 		}
 		currentoffer.setCategory(specialoffer.getCategory()); 
-		specialofferDao.Save(specialoffer);
+		specialofferDao.edit(specialoffer);
 		return currentoffer;
 	}
 	
@@ -77,17 +77,17 @@ public class SpecialOfferServiceImp implements SpecialOfferService{
 	
 	@Override
 	public Iterable<Specialoffer> findAll() {
-		return sor.findAll();
+		return specialofferDao.findAll();
 	}
 	
 	@Override
-	public Optional<Specialoffer> findById(Integer id) {
-		return sor.findById(id);
+	public Specialoffer findById(Integer id) {
+		return specialofferDao.findById(id);
 	}
 	
 	@Override
 	public void delete(Specialoffer specioff) {
-		sor.delete(specioff);
+		specialofferDao.delete(specioff);
 	}
 	
 	

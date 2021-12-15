@@ -12,7 +12,7 @@ public interface SpecialOfferService {
 
 	Iterable<Specialoffer> findAll();
 
-	Optional<Specialoffer> findById(Integer id);
+	Specialoffer findById(Integer id);
 
 	void delete(Specialoffer specialoffer);
 
