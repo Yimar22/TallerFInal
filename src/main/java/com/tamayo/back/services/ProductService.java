@@ -19,7 +19,7 @@ public Product saveProduct(Product product);
 	
 	public Iterable<Product> findAll();	
 
-	public Optional<Product> findById(long id);
+	public Product findById(Integer id);
 	
 	public void delete(Product product);
 

@@ -45,6 +45,7 @@ public class SalesOrderDetailServiceImp implements SalesOrderDetailService {
 		if(!result) return null;
 		
 		saleOrderDetail = salesOrderDetailRep.save(saleOrderDetail);
+		salesOrderDetailDao.save(saleOrderDetail);
 		return saleOrderDetail;
 	}
 	
@@ -65,6 +66,7 @@ public class SalesOrderDetailServiceImp implements SalesOrderDetailService {
 		}
 		
 	sod.setSpecialofferproduct(saleOrderDetail.getSpecialofferproduct());
+	salesOrderDetailDao.edit(saleOrderDetail);
 		return sod;
 		
 	}
@@ -76,17 +78,17 @@ public class SalesOrderDetailServiceImp implements SalesOrderDetailService {
 	
 	@Override
 	public Iterable<Salesorderdetail> findAll() {
-		return salesOrderDetailRep.findAll();
+		return salesOrderDetailDao.findAll();
 	}
 	
 	@Override
-	public Optional<Salesorderdetail> findById(Integer id) {
-		return salesOrderDetailRep.findById(id);
+	public Salesorderdetail findById(Integer id) {
+		return salesOrderDetailDao.findById(id);
 	}
 	
 	@Override
 	public void delete(Salesorderdetail salorderdet) {
-		salesOrderDetailRep.delete(salorderdet);
+		salesOrderDetailDao.delete(salorderdet);
 	}
 
 		

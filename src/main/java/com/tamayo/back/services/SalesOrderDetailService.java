@@ -14,7 +14,7 @@ public interface SalesOrderDetailService {
 
 	public Iterable<Salesorderdetail> findAll();
 	
-	public Optional<Salesorderdetail> findById(Integer id);
+	public Salesorderdetail findById(Integer id);
 	
 	public void delete(Salesorderdetail salesOrderDetail);
 	

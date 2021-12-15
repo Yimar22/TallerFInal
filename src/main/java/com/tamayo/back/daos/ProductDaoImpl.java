@@ -19,20 +19,20 @@ public class ProductDaoImpl implements ProductDao{
 	private EntityManager em;
 	
 	@Override
-	public void Save(Product entity) {
+	public void save(Product entity) {
 		em.persist(entity);
 		
 	}
 
 	@Override
-	public void Delete(Product entity) {
+	public void delete(Product entity) {
 		Product attachedEntity = em.merge(entity);
 		em.remove(attachedEntity);
 		
 	}
 
 	@Override
-	public void Edit(Product entity) {
+	public void edit(Product entity) {
 		em.merge(entity);
 		
 	}

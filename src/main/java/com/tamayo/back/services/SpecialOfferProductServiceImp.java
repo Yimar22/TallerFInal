@@ -39,6 +39,7 @@ public class SpecialOfferProductServiceImp implements SpecialOfferProductService
 		}
 		
 		specialofferproduct = sopr.save(specialofferproduct);
+		specialOfferProductDao.Save(specialofferproduct);
 		return specialofferproduct;		
 	}
 
@@ -60,6 +61,7 @@ public class SpecialOfferProductServiceImp implements SpecialOfferProductService
 		}
 		
 	specialofferproduct.setSpecialoffer(specialofferproduct.getSpecialoffer());
+	specialOfferProductDao.Save(specialofferproduct);
 		return sop;
 		
 	}

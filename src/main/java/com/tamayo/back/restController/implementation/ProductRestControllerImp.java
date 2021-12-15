@@ -1,6 +1,5 @@
 package com.tamayo.back.restController.implementation;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,8 +23,8 @@ public class ProductRestControllerImp {
 		this.productServ = productServ;
 	}
 	
-	@GetMapping("/")
-	public Iterable<Product> indexProduct(Model model) {
+	@GetMapping("/prod/")
+	public Iterable<Product> indexProduct() {
 		return productServ.findAll();
 	}
 	
@@ -37,16 +36,20 @@ public class ProductRestControllerImp {
     }
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/prod/delete")
 	public void deleteProduct(@RequestBody Product product)  {
 		productServ.delete(product);
 	}
 
 	
-	@PutMapping("/{instid}")
+	@PutMapping("/prod/edit")
 	public void updateProduct(@RequestBody Product product) {
 		productServ.editProduct(product);
 	}
-
+	
+	@GetMapping("/prod/")
+	public Product findByIdProduct(@PathVariable("id") Integer id) {
+		return productServ.findById(id);
+	}
 	
 }

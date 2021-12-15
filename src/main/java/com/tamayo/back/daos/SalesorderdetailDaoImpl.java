@@ -16,25 +16,25 @@ public class SalesorderdetailDaoImpl implements SalesorderdetailDao{
 	private EntityManager em;
 	
 	@Override
-	public void Save(Salesorderdetail entity) {
+	public void save(Salesorderdetail entity) {
 		em.persist(entity);
 		
 	}
 
 	@Override
-	public void Delete(Salesorderdetail entity) {
+	public void delete(Salesorderdetail entity) {
 		Salesorderdetail attachedEntity = em.merge(entity);
 		em.remove(attachedEntity);
 		
 	}
 
 	@Override
-	public void Edit(Salesorderdetail entity) {
+	public void edit(Salesorderdetail entity) {
 		em.merge(entity);
 	}
 
 	@Override
-	public Salesorderdetail findById(SalesorderdetailPK id) {
+	public Salesorderdetail findById(Integer id) {
 		return em.find(Salesorderdetail.class, id);
 	}
 

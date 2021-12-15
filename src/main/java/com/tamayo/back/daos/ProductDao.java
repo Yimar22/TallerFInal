@@ -7,9 +7,9 @@ import com.tamayo.back.model.Productmodel;
 
 
 public interface ProductDao {
-	public void Save(Product entity);
-	public void Delete(Product entity);
-	public void Edit(Product entity);
+	public void save(Product entity);
+	public void delete(Product entity);
+	public void edit(Product entity);
 	public Product findById(Integer id);
 	public List<Product> findByProductNumber(String productnumber);
 	public List<Product> findAll();

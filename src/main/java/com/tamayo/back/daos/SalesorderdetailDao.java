@@ -9,10 +9,10 @@ import com.tamayo.back.model.SalesorderdetailPK;
 
 
 public interface SalesorderdetailDao {
-	public void Save(Salesorderdetail entity);
-	public void Delete(Salesorderdetail entity);
-	public void Edit(Salesorderdetail entity);
-	public Salesorderdetail findById(SalesorderdetailPK id);
+	public void save(Salesorderdetail entity);
+	public void delete(Salesorderdetail entity);
+	public void edit(Salesorderdetail entity);
+	public Salesorderdetail findById(Integer id);
 	public Product findByProductid(Integer id);
 	public Businessentity findByBusinessentityid(Integer id);
 	public List<Salesorderdetail> findAll();

@@ -50,7 +50,7 @@ public class ProductServiceImp implements ProductService{
 		boolean result = product.getProductnumber() != null && product.getSellstartdate().before(product.getSellenddate()) && product.getDaystomanufacture() > 0;
 		if(!result)return null;
 		product = productRepository.save(product);
-		
+		productDao.save(product);
 		return product;
 	}
 	
@@ -77,6 +77,7 @@ public class ProductServiceImp implements ProductService{
 		existingProduct.setProductsubcategory(product.getProductsubcategory());
 		existingProduct.setUnitmeasure1(product.getUnitmeasure1());
 		existingProduct.setUnitmeasure2(product.getUnitmeasure2());
+		productDao.edit(product);
 		return product;
 	}
 	
@@ -87,17 +88,17 @@ public class ProductServiceImp implements ProductService{
 	
 	@Override
 	public Iterable<Product> findAll() {
-		return productRepository.findAll();
+		return productDao.findAll();
 	}
 	
 	@Override
-	public Optional<Product> findById(long id) {
-		return productRepository.findById((int) id);
+	public Product findById(Integer id) {
+		return productDao.findById(id);
 	}
 	
 	@Override
 	public void delete(Product prod) {
-		productRepository.delete(prod);
+		productDao.delete(prod);
 	}
 
 
