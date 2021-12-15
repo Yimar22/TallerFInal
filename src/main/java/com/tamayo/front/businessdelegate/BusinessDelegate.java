@@ -2,13 +2,7 @@ package com.tamayo.front.businessdelegate;
 
 import java.util.List;
 
-import com.tamayo.back.model.Product;
-import com.tamayo.back.model.Salesorderdetail;
-import com.tamayo.back.model.SalesorderdetailPK;
-import com.tamayo.back.model.Specialoffer;
-import com.tamayo.back.model.Specialofferproduct;
-import com.tamayo.back.model.SpecialofferproductPK;
-import com.tamayo.back.model.Workorder;
+import com.tamayo.front.model.*;
 
 
 
@@ -39,7 +33,7 @@ public interface BusinessDelegate {
 	
 	public void salesOrderDetailEdit(Salesorderdetail salesOrderDetail);
 	
-	public Salesorderdetail salesOrderDetailFindById(SalesorderdetailPK id);
+	public Salesorderdetail salesOrderDetailFindById(Integer id);
 	
 	public void salesOrderDetailDelete(Salesorderdetail id);
 	
@@ -83,4 +77,16 @@ public interface BusinessDelegate {
 	void workorder_delete(Workorder workorder);
 	Workorder workorder_findById(Integer id);
 	void editWorkorder(Workorder workorder);
+	
+	// ==========================
+	// Work order routing
+	// ==========================
+	
+	Workorderrouting workorderrouting_get(Integer id);
+	List<Workorderrouting> workorderrouting_findAllByLocation(Integer id);
+	List<Workorderrouting> workorderrouting_findAll();
+	Workorderrouting workorderrouting_save(Workorderrouting workorderrouting);
+	void workorderrouting_delete(Workorderrouting workorderrouting);
+	Workorderrouting workorderrouting_findById(Integer id);
+	void editWorkorderrouting(Workorderrouting workorderrouting);
 }

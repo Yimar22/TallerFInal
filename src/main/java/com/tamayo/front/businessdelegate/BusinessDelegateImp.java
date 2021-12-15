@@ -7,19 +7,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.tamayo.back.model.Product;
-import com.tamayo.back.model.Salesorderdetail;
-import com.tamayo.back.model.SalesorderdetailPK;
-import com.tamayo.back.model.Specialoffer;
-import com.tamayo.back.model.Specialofferproduct;
-import com.tamayo.back.model.SpecialofferproductPK;
-import com.tamayo.back.model.Workorder;
+import com.tamayo.front.model.*;
 
 @Component
 public class BusinessDelegateImp implements BusinessDelegate {
 	
 	public static final String REST_URL = "http://localhost:8080/api";
 	private final static String WORK_ORDER_URL = REST_URL+"/workorders/";
+	private final static String WORK_ORDER_ROUTING_URL = REST_URL+"/workorderroutings/";
 
 	private RestTemplate restTemplate;
 	
@@ -95,7 +90,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	}
 
 	@Override
-	public Salesorderdetail salesOrderDetailFindById(SalesorderdetailPK id) {
+	public Salesorderdetail salesOrderDetailFindById(Integer id) {
 		String url = REST_URL + "salesOrderDetail/show/" + id;
 		
 		Salesorderdetail salesOrderDetail = restTemplate.getForObject(url, Salesorderdetail.class); 
@@ -239,6 +234,54 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	public void editWorkorder(Workorder workorder) {
 		restTemplate.put(WORK_ORDER_URL, workorder, Workorder.class);
 		
+	}
+
+	//------------------------------------------------------------------
+	//							Workorderrouting
+	//------------------------------------------------------------------
+
+	@Override
+	public Workorderrouting workorderrouting_get(Integer id) {
+		return restTemplate.getForObject(WORK_ORDER_ROUTING_URL, Workorderrouting.class);
+	}
+
+
+	@Override
+	public List<Workorderrouting> workorderrouting_findAllByLocation(Integer id) {
+		Workorderrouting[] array = restTemplate.getForObject(WORK_ORDER_URL+"search/findAllByLocation?location="+id, Workorderrouting[].class);
+		return Arrays.asList(array);
+	}
+
+
+	@Override
+	public List<Workorderrouting> workorderrouting_findAll() {
+		Workorderrouting[] array = restTemplate.getForObject(WORK_ORDER_URL, Workorderrouting[].class);
+		return Arrays.asList(array);
+	}
+
+
+	@Override
+	public Workorderrouting workorderrouting_save(Workorderrouting workorderrouting) {
+		HttpEntity<Workorderrouting> request = new HttpEntity<>(workorderrouting);
+		return restTemplate.postForObject(WORK_ORDER_ROUTING_URL, request, Workorderrouting.class);
+	}
+
+
+	@Override
+	public void workorderrouting_delete(Workorderrouting workorderrouting) {
+		restTemplate.delete(WORK_ORDER_ROUTING_URL+workorderrouting.getId());
+	}
+
+
+	@Override
+	public Workorderrouting workorderrouting_findById(Integer id) {
+		return restTemplate.getForObject(WORK_ORDER_ROUTING_URL+id, Workorderrouting.class);
+	}
+
+
+	@Override
+	public void editWorkorderrouting(Workorderrouting workorderrouting) {
+		restTemplate.put(WORK_ORDER_ROUTING_URL, workorderrouting, Workorderrouting.class);
 	}
 	
 
