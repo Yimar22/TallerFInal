@@ -10,6 +10,13 @@ public interface SalesOrderDetailService {
 
 	public Salesorderdetail saveSaleOrderDetail(Salesorderdetail salesOrderDetail);
 	public Salesorderdetail editSaleOrderDetail(Salesorderdetail salesOrderDetail);
+	boolean existsById(Integer salesOrderDetailId);
+
+	public Iterable<Salesorderdetail> findAll();
+	
+	public Optional<Salesorderdetail> findById(Integer id);
+	
+	public void delete(Salesorderdetail salesOrderDetail);
 	
 	
 }

@@ -13,6 +13,10 @@ import com.tamayo.back.repositories.ProductModelRepository;
 import com.tamayo.back.repositories.ProductRepository;
 import com.tamayo.back.repositories.ProductSubCategoryRepository;
 import com.tamayo.back.repositories.UnitMeasureRepository;
+import com.tamayo.back.model.Product;
+import com.tamayo.back.model.Productmodel;
+import com.tamayo.back.model.Productsubcategory;
+import com.tamayo.back.model.Unitmeasure;
 
 import lombok.extern.java.Log;
 
@@ -46,7 +50,7 @@ public class ProductServiceImp implements ProductService{
 		boolean result = product.getProductnumber() != null && product.getSellstartdate().before(product.getSellenddate()) && product.getDaystomanufacture() > 0;
 		if(!result)return null;
 		product = productRepository.save(product);
-		productDao.Save(product);
+		
 		return product;
 	}
 	
@@ -73,11 +77,54 @@ public class ProductServiceImp implements ProductService{
 		existingProduct.setProductsubcategory(product.getProductsubcategory());
 		existingProduct.setUnitmeasure1(product.getUnitmeasure1());
 		existingProduct.setUnitmeasure2(product.getUnitmeasure2());
-		productDao.Save(product);
 		return product;
 	}
 	
+	@Override
+	public boolean existsById(Integer productId) {
+		return productRepository.existsById(productId);
+	}
 	
+	@Override
+	public Iterable<Product> findAll() {
+		return productRepository.findAll();
+	}
 	
+	@Override
+	public Optional<Product> findById(long id) {
+		return productRepository.findById((int) id);
+	}
+	
+	@Override
+	public void delete(Product prod) {
+		productRepository.delete(prod);
+	}
+
+
+	@Override
+	public Iterable<Product> findAllByProductmodel(Productmodel productModel) {
+		return productRepository.findAllByProductmodel(productModel);
+		
+	}
+
+
+	@Override
+	public Iterable<Product> findAllByProductsubcategory(Productsubcategory productSubcategory) {
+		return productRepository.findAllByProductsubcategory(productSubcategory);
+		
+	}
+
+
+	@Override
+	public Iterable<Product> findAllByUnitmeasure1(Unitmeasure unitmeasure) {
+		return productRepository.findAllByUnitmeasure1(unitmeasure);
+	}
+
+
+	@Override
+	public Iterable<Product> findAllByUnitmeasure2(Unitmeasure unitmeasure) {
+		return productRepository.findAllByUnitmeasure2(unitmeasure);
+
+	}
 		
 }

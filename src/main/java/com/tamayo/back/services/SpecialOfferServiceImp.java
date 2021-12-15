@@ -70,5 +70,25 @@ public class SpecialOfferServiceImp implements SpecialOfferService{
 		return currentoffer;
 	}
 	
+	@Override
+	public boolean existsById(Integer specialOfferId) {
+		return sor.existsById(specialOfferId);
+	}
+	
+	@Override
+	public Iterable<Specialoffer> findAll() {
+		return sor.findAll();
+	}
+	
+	@Override
+	public Optional<Specialoffer> findById(Integer id) {
+		return sor.findById(id);
+	}
+	
+	@Override
+	public void delete(Specialoffer specioff) {
+		sor.delete(specioff);
+	}
+	
 	
 }

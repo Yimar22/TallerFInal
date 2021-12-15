@@ -45,16 +45,15 @@ public class SalesOrderDetailServiceImp implements SalesOrderDetailService {
 		if(!result) return null;
 		
 		saleOrderDetail = salesOrderDetailRep.save(saleOrderDetail);
-		salesOrderDetailDao.Save(saleOrderDetail);
 		return saleOrderDetail;
 	}
 	
 	public Salesorderdetail editSaleOrderDetail(Salesorderdetail saleOrderDetail) {
-		if(saleOrderDetail == null ||!salesOrderDetailRep.existsById(saleOrderDetail.getId().getSalesorderdetailid())) {	
+		if(saleOrderDetail == null ||!salesOrderDetailRep.existsById(saleOrderDetail.getId())) {	
 			throw new RuntimeException();
 		}
 	
-	Integer id = saleOrderDetail.getId().getSalesorderdetailid();
+	Integer id = saleOrderDetail.getId();
 	Salesorderdetail sod = salesOrderDetailRep.findById(id).get();
 	
 
@@ -66,15 +65,30 @@ public class SalesOrderDetailServiceImp implements SalesOrderDetailService {
 		}
 		
 	sod.setSpecialofferproduct(saleOrderDetail.getSpecialofferproduct());
-	salesOrderDetailDao.Save(saleOrderDetail);
 		return sod;
 		
 	}
 	
+	@Override
+	public boolean existsById(Integer salesOrderDetailId) {
+		return salesOrderDetailRep.existsById(salesOrderDetailId);
+	}
 	
-
-
+	@Override
+	public Iterable<Salesorderdetail> findAll() {
+		return salesOrderDetailRep.findAll();
+	}
 	
+	@Override
+	public Optional<Salesorderdetail> findById(Integer id) {
+		return salesOrderDetailRep.findById(id);
+	}
+	
+	@Override
+	public void delete(Salesorderdetail salorderdet) {
+		salesOrderDetailRep.delete(salorderdet);
+	}
+
 		
 	
 }

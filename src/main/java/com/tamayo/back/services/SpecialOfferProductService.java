@@ -9,6 +9,13 @@ public interface SpecialOfferProductService {
 	
 	public Specialofferproduct save(Specialofferproduct specialofferproduct);
 	public Specialofferproduct edit(Specialofferproduct specialofferproduct);
-	
+
+	boolean existsById(SpecialofferproductPK specialOfferProductId);
+
+	Iterable<Specialofferproduct> findAll();
+
+	Optional<Specialofferproduct> findById(SpecialofferproductPK id);
+
+	void delete(Specialofferproduct specioffprod);
 	
 }
