@@ -26,12 +26,12 @@ public class Product implements Serializable {
 	private String class_;
 
 	private Integer productid;
-
-	private Integer daystomanufacture;
-
+	
 	private String name;
-
+	
 	private String productnumber;
+	
+	private Integer daystomanufacture;
 
 	private Timestamp sellenddate;
 

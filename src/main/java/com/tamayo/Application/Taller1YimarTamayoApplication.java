@@ -1,4 +1,4 @@
-package com.tamayo.TallerPruebas;
+package com.tamayo.Application;
 
 import java.sql.Timestamp;
 import java.time.Instant;
