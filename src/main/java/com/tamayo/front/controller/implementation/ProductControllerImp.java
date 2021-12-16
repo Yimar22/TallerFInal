@@ -40,12 +40,10 @@ public class ProductControllerImp implements ProductController{
 	
 	@GetMapping("/prod/add")
     public String addProduct(Model model) {
-        model.addAttribute("prod", new Product());
-		//model.addAttribute("prod", businessDelegate.productFindAll());
-		//model.addAttribute("prodsubcats", productSubcategoryService.findAll() );
-	    //model.addAttribute("prodmods", productModelService.findAll() );
-	    //model.addAttribute("unitme1s", unitMeasureService.findAll() );
-	    //model.addAttribute("unitme2s", unitMeasureService.findAll() );
+        model.addAttribute("product", new Product());
+		model.addAttribute("subcategory", businessDelegate.productsubcategory_save());
+	    model.addAttribute("unitme1", businessDelegate.unitmeasure1_save() );
+	    model.addAttribute("unitme2", businessDelegate.unitmeasure2_save());
         return "prod/add-prod";
         		
     }

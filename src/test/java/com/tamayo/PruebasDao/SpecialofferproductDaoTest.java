@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.tamayo.Application.Taller1YimarTamayoApplication;
+import com.tamayo.Application.TallerFinalApplication;
 import com.tamayo.back.daos.SpecialofferproductDao;
 import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
 @SpringBootTest
-@ContextConfiguration(classes= Taller1YimarTamayoApplication.class)
+@ContextConfiguration(classes= TallerFinalApplication.class)
 @TestMethodOrder(OrderAnnotation.class)
 class SpecialofferproductDaoTest {
 

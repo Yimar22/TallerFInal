@@ -13,6 +13,9 @@ import com.tamayo.front.model.*;
 public class BusinessDelegateImp implements BusinessDelegate {
 	
 	public static final String REST_URL = "http://localhost:8080/api";
+	private final static String PRODUCT_SUBCATEGORY_URL = REST_URL+"/productsubcategorys/";
+	private final static String UNITMEASURE_1_URL = REST_URL+"/unitmeasure1s/";
+	private final static String UNITMEASURE_2_URL = REST_URL+"/unitmeasure2s/";
 	private final static String WORK_ORDER_URL = REST_URL+"/workorders/";
 	private final static String WORK_ORDER_ROUTING_URL = REST_URL+"/workorderroutings/";
 
@@ -63,6 +66,24 @@ public class BusinessDelegateImp implements BusinessDelegate {
 		restTemplate.delete(url);
 	}
 	
+	@Override
+	public Productsubcategory productsubcategory_save(Productsubcategory productsubcategory) {
+		HttpEntity<Productsubcategory> request = new HttpEntity<>(productsubcategory);
+		return restTemplate.postForObject(PRODUCT_SUBCATEGORY_URL, request, Productsubcategory.class);
+	}
+
+
+	@Override
+	public Unitmeasure unitmeasure1_save(Unitmeasure unitmeasure) {
+		HttpEntity<Unitmeasure> request = new HttpEntity<>(unitmeasure);
+		return restTemplate.postForObject(UNITMEASURE_1_URL, request, Unitmeasure.class);
+	}
+	
+	@Override
+	public Unitmeasure unitmeasure2_save(Unitmeasure unitmeasure) {
+		HttpEntity<Unitmeasure> request = new HttpEntity<>(unitmeasure);
+		return restTemplate.postForObject(UNITMEASURE_2_URL, request, Unitmeasure.class);
+	}
 
 	//------------------------------------------------------------------
 	//							Salesorderdetail
@@ -283,6 +304,9 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	public void editWorkorderrouting(Workorderrouting workorderrouting) {
 		restTemplate.put(WORK_ORDER_ROUTING_URL, workorderrouting, Workorderrouting.class);
 	}
+
+
+
 	
 
 	

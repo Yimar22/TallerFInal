@@ -12,7 +12,7 @@ import com.tamayo.back.model.Product;
 import com.tamayo.back.repositories.ProductModelRepository;
 import com.tamayo.back.repositories.ProductRepository;
 import com.tamayo.back.repositories.ProductSubCategoryRepository;
-import com.tamayo.back.repositories.UnitMeasureRepository;
+import com.tamayo.back.repositories.UnitMeasureRepository1;
 import com.tamayo.back.model.Product;
 import com.tamayo.back.model.Productmodel;
 import com.tamayo.back.model.Productsubcategory;
@@ -28,12 +28,12 @@ public class ProductServiceImp implements ProductService{
 	private ProductDao productDao;
 	private ProductSubCategoryRepository productSubcategoryRepository;
 	private ProductRepository productRepository;
-	private UnitMeasureRepository unitMeasureRepository;
+	private UnitMeasureRepository1 unitMeasureRepository;
 	private ProductModelRepository productModelRepository;
 	
 	
 	@Autowired
-	public ProductServiceImp(ProductDao productDao, ProductSubCategoryRepository productSubcategoryRepository, ProductRepository productRepository, UnitMeasureRepository unitMeasureRepository, ProductModelRepository productModelRepository) {
+	public ProductServiceImp(ProductDao productDao, ProductSubCategoryRepository productSubcategoryRepository, ProductRepository productRepository, UnitMeasureRepository1 unitMeasureRepository, ProductModelRepository productModelRepository) {
 		this.productDao= productDao;
 		this.productSubcategoryRepository = productSubcategoryRepository;
 		this.productRepository = productRepository; 

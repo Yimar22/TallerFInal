@@ -9,7 +9,7 @@ import com.tamayo.back.model.Unitmeasure;
 
 
 @Repository
-public interface UnitMeasureRepository extends CrudRepository<Unitmeasure, Integer>{
+public interface UnitMeasureRepository2 extends CrudRepository<Unitmeasure, Integer>{
 
 	public Optional<Unitmeasure> findById(String unitMeasureCode);
 

@@ -14,19 +14,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.tamayo.Application.Taller1YimarTamayoApplication;
+import com.tamayo.Application.TallerFinalApplication;
 import com.tamayo.back.daos.ProductDao;
 import com.tamayo.back.model.Product;
 import com.tamayo.back.repositories.ProductModelRepository;
 import com.tamayo.back.repositories.ProductRepository;
 import com.tamayo.back.repositories.ProductSubCategoryRepository;
-import com.tamayo.back.repositories.UnitMeasureRepository;
+import com.tamayo.back.repositories.UnitMeasureRepository1;
 import com.tamayo.back.services.ProductService;
 import com.tamayo.back.services.ProductServiceImp;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes= Taller1YimarTamayoApplication.class)
+@ContextConfiguration(classes= TallerFinalApplication.class)
 
 class ProductTest {
 
@@ -39,7 +39,7 @@ class ProductTest {
 	@Autowired
 	private ProductService productServ;
 	@Autowired
-	private UnitMeasureRepository unitMeasureRepository;
+	private UnitMeasureRepository1 unitMeasureRepository;
 	@Autowired
 	private ProductModelRepository productModelRepository;
 	

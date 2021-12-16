@@ -105,16 +105,6 @@
 						</div>
 						
 						<div class="form-group col-md-6">
-							<label for="productcategory" class="col-form-label">Categoria</label> <select
-								class="form-control-range" th:field="*{productcategory}">
-								<!-- Aqui sucede la magia --> 
-								<option th:each="productcategory : ${productcategorys}" th:value="${product.productsubcategory.productcategory.productcategoryid}"
-									class="form-control" th:text="${productcategory.name}"
-									th:selected="${product.productsubcategory.productcategory=productcategory}"></option>
-							</select>
-						</div>
-						
-						<div class="form-group col-md-6">
 							<label for="productsubcategory" class="col-form-label">Subcategoria</label> <select
 								class="form-control-range" th:field="*{productsubcategory}">
 								<!-- Aqui sucede la magia --> 

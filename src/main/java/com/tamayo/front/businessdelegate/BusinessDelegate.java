@@ -23,6 +23,11 @@ public interface BusinessDelegate {
 	
 	public void productDelete(Integer id);
 	
+	public Productsubcategory productsubcategory_save(Productsubcategory productsubcategory);
+	
+	public Unitmeasure unitmeasure1_save(Unitmeasure unitmeasure);
+	
+	public Unitmeasure unitmeasure2_save(Unitmeasure unitmeasure);
 	 // ==========================
     // SALES ORDER DETAIL
     // ==========================

@@ -41,7 +41,8 @@ public class SpecialOfferProductControllerImp implements SpecialOfferProductCont
 	
 	@GetMapping("/specioffprod/add")
 	public String addSpecialOfferProduct(Model model) {
-	//model.addAttribute("prod", businessDelegate.productFindAll());
+		model.addAttribute("product", businessDelegate.productFindAll());
+		model.addAttribute("specialoffer", businessDelegate.specialofferFindAll());
 		model.addAttribute("specioffprod", new Specialofferproduct());
 		return  "specioffprod/add-specioffprod";
 	}
