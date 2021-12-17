@@ -30,7 +30,7 @@ import com.tamayo.back.model.Unitmeasure;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.tamayo")
+@ComponentScan("com.tamayo")
 public class TallerFinalApplication {
 	
 	private static ProductSubcategoryServiceImpl pss;

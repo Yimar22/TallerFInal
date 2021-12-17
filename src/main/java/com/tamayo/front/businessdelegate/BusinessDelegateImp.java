@@ -17,7 +17,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	private final static String UNITMEASURE_URL = REST_URL+"/unitmeasure1s/";
 	private final static String WORK_ORDER_URL = REST_URL+"/workorders/";
 	private final static String WORK_ORDER_ROUTING_URL = REST_URL+"/workorderroutings/";
-	private final static String PRODUCT_URL=REST_URL+"/products/";
+	private final static String PRODUCT_URL=REST_URL+"/product/";
 	private final static String LOCATION_URL=REST_URL+"/locations/";
 
 	private RestTemplate restTemplate;
@@ -82,7 +82,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public List<Salesorderdetail> salesOrderDetailFindAll() {
-		String url = REST_URL + "salesOrderDetail/";
+		String url = REST_URL + "saleorderdet/";
 		Salesorderdetail[] salesOrderDetail = restTemplate.getForObject(url, Salesorderdetail[].class);
 		List<Salesorderdetail> result = Arrays.asList(salesOrderDetail);
 		return result;
@@ -90,19 +90,19 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public void salesOrderDetailSave(Salesorderdetail salesOrderDetail) {
-		String url = REST_URL + "/salesOrderDetail/save";
+		String url = REST_URL + "/saleorderdet/save";
 		restTemplate.postForObject(url, salesOrderDetail, Salesorderdetail.class);
 	}
 
 	@Override
 	public void salesOrderDetailEdit(Salesorderdetail salesOrderDetail) {
-		String url = REST_URL + "salesOrderDetail/edit";
+		String url = REST_URL + "saleorderdet/edit";
 		restTemplate.put(url, salesOrderDetail, Salesorderdetail.class);
 	}
 
 	@Override
 	public Salesorderdetail salesOrderDetailFindById(Integer id) {
-		String url = REST_URL + "salesOrderDetail/show/" + id;
+		String url = REST_URL + "saleorderdet/" + id;
 		
 		Salesorderdetail salesOrderDetail = restTemplate.getForObject(url, Salesorderdetail.class); 
 		
@@ -111,7 +111,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public void salesOrderDetailDelete(Salesorderdetail id) {
-		String url = REST_URL + "salesOrderDetail/delete/" + id;
+		String url = REST_URL + "saleorderdet/delete/" + id;
 		restTemplate.delete(url);
 	}
 
@@ -121,7 +121,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	
 	@Override
 	public List<Specialofferproduct> specialofferproductFindAll() {
-		String url = REST_URL + "specialofferproduct/";
+		String url = REST_URL + "specioffprod/";
 		Specialofferproduct[] specialofferproduct = restTemplate.getForObject(url, Specialofferproduct[].class);
 		List<Specialofferproduct> result = Arrays.asList(specialofferproduct);
 		return result;
@@ -129,20 +129,20 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public void specialofferproductSave(Specialofferproduct specialofferproduct) {
-		String url = REST_URL + "/specialofferproduct/save";
+		String url = REST_URL + "/specioffprod/save";
 		restTemplate.postForObject(url, specialofferproduct, Specialofferproduct.class);
 	}
 
 	@Override
 	public void specialofferproductEdit(Specialofferproduct specialofferproduct) {
-		String url = REST_URL + "specialofferproduct/edit";
+		String url = REST_URL + "specioffprod/edit";
 		restTemplate.put(url, specialofferproduct, Specialofferproduct.class);
 		
 	}
 
 	@Override
 	public Specialofferproduct specialofferproductFindById(SpecialofferproductPK id) {
-		String url = REST_URL + "specialofferproduct/show/" + id;
+		String url = REST_URL + "specioffprod/" + id;
 		
 		Specialofferproduct specialofferproduct = restTemplate.getForObject(url, Specialofferproduct.class); 
 		
@@ -151,7 +151,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public void specialofferproductDelete(Specialofferproduct id) {
-		String url = REST_URL + "specialofferproduct/delete/" + id;
+		String url = REST_URL + "specioffprod/delete/" + id;
 		restTemplate.delete(url);
 		
 	}
@@ -162,7 +162,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public List<Specialoffer> specialofferFindAll() {
-		String url = REST_URL + "specialoffer/";
+		String url = REST_URL + "specioff/";
 		Specialoffer[] specialoffer = restTemplate.getForObject(url, Specialoffer[].class);
 		List<Specialoffer> result = Arrays.asList(specialoffer);
 		return result;
@@ -170,20 +170,20 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public void specialofferSave(Specialoffer specialoffer) {
-		String url = REST_URL + "/specialoffer/save";
+		String url = REST_URL + "/specioff/save";
 		restTemplate.postForObject(url, specialoffer, Specialoffer.class);
 	}
 
 	@Override
 	public void specialofferEdit(Specialoffer specialoffer) {
-		String url = REST_URL + "specialoffer/edit";
+		String url = REST_URL + "specioff/edit";
 		restTemplate.put(url, specialoffer, Specialoffer.class);
 		
 	}
 
 	@Override
 	public Specialoffer specialofferFindById(Integer id) {
-		String url = REST_URL + "specialoffer/show/" + id;
+		String url = REST_URL + "specioff/" + id;
 		
 		Specialoffer specialoffer = restTemplate.getForObject(url, Specialoffer.class); 
 		
@@ -192,7 +192,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 
 	@Override
 	public void specialofferDelete(Specialoffer id) {
-		String url = REST_URL + "specialoffer/delete/" + id;
+		String url = REST_URL + "specioff/delete/" + id;
 		restTemplate.delete(url);
 	}
 	

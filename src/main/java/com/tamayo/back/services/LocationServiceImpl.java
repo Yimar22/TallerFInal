@@ -3,6 +3,7 @@ package com.tamayo.back.services;
 import java.sql.Timestamp;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tamayo.back.model.Location;
@@ -13,6 +14,7 @@ public class LocationServiceImpl {
 	
 	private LocationRepository locationRepo;
 
+	@Autowired
 	public LocationServiceImpl(LocationRepository locationRepo) {
 		this.locationRepo = locationRepo;
 	}

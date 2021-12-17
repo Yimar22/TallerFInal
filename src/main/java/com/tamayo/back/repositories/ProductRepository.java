@@ -1,7 +1,7 @@
 package com.tamayo.back.repositories;
 
 import org.springframework.data.repository.CrudRepository;
-
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
 import com.tamayo.back.model.Product;
@@ -10,7 +10,7 @@ import com.tamayo.back.model.Productmodel;
 import com.tamayo.back.model.Productsubcategory;
 import com.tamayo.back.model.Unitmeasure;
 
-@Repository
+@RepositoryRestResource
 public interface ProductRepository extends CrudRepository<Product, Integer>{
 
 public Iterable<Product> findAllByProductmodel(Productmodel productModel);
