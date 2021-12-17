@@ -10,14 +10,11 @@ import java.util.List;
  * The persistent class for the workorder database table.
  * 
  */
-@Entity
-@NamedQuery(name="Workorder.findAll", query="SELECT w FROM Workorder w")
+
 public class Workorder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name="WORKORDER_WORKORDERID_GENERATOR",allocationSize = 1, sequenceName="WORKORDER_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="WORKORDER_WORKORDERID_GENERATOR")
+	
 	private Integer workorderid;
 
 	private Timestamp duedate;
@@ -33,13 +30,13 @@ public class Workorder implements Serializable {
 	private Timestamp startdate;
 
 	//bi-directional many-to-one association to Product
-	@ManyToOne
-	@JoinColumn(name="productid")
+//	@ManyToOne
+	//@JoinColumn(name="productid")
 	private Product product;
 
 
 	//bi-directional many-to-one association to Workorderrouting
-	@OneToMany(mappedBy="workorder")
+//	@OneToMany(mappedBy="workorder")
 	private List<Workorderrouting> workorderroutings;
 
 	public Workorder() {

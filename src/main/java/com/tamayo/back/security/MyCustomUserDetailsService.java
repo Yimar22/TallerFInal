@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.tamayo.back.model.Userr;
 import com.tamayo.back.repositories.UserRepository;
 
 import lombok.extern.java.Log;
@@ -27,11 +28,11 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		List<com.tamayo.back.model.User> users = userRepository.findByUsername(username);
+		List<Userr> users = userRepository.findByUsername(username);
 		
 		if (users != null) {
 			log.info("found");
-			com.tamayo.back.model.User userApp = users.get(0);
+			Userr userApp = users.get(0);
 			User.UserBuilder builder = User.withUsername(username).password(userApp.getUserPassword()).roles(userApp.getUsertype().toString());
 			return builder.build();
 		} else {

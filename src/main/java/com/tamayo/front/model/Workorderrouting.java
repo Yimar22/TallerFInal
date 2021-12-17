@@ -18,8 +18,7 @@ import com.tamayo.front.model.Location;
  * The persistent class for the workorderrouting database table.
  *
  */
-@Entity
-@NamedQuery(name = "Workorderrouting.findAll", query = "SELECT w FROM Workorderrouting w")
+
 public class Workorderrouting implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

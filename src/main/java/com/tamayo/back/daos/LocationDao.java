@@ -23,11 +23,13 @@ public class LocationDao implements Dao<Location>{
 		return Optional.ofNullable(em.find(Location.class, id));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Location> getAll() {
-		Query query = em.createQuery("SELECT l FROM Location l");
-		return query.getResultList();
+		String q = "SELECT l FROM Location l";
+		return em.createQuery(q).getResultList();
 	}
+	
 
 	@Override
 	@Transactional

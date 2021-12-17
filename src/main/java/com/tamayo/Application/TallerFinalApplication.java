@@ -6,13 +6,15 @@ import java.util.ArrayList;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
-import com.tamayo.back.model.User;
 import com.tamayo.back.model.UserType;
+import com.tamayo.back.model.Userr;
 import com.tamayo.back.model.Workorder;
 import com.tamayo.back.model.Workorderrouting;
 import com.tamayo.back.services.LocationServiceImpl;
@@ -31,6 +33,8 @@ import com.tamayo.back.model.Unitmeasure;
 
 @SpringBootApplication
 @ComponentScan("com.tamayo")
+@EntityScan("com.tamayo")
+@EnableJpaRepositories("com.tamayo.back.repositories")
 public class TallerFinalApplication {
 	
 	private static ProductSubcategoryServiceImpl pss;
@@ -154,9 +158,17 @@ public class TallerFinalApplication {
 	}
 
 	private static void setUsers(ConfigurableApplicationContext context) {
-		User u = new User(1,null, "YimarT","0000", UserType.administrador, null);
+		Userr u = new Userr();
+		u.setUserId(1);
+		u.setUserName("YimarT");
+		u.setUserPassword("0000");
+		u.setUsertype(UserType.administrador);
 		us.save(u);
-		User v = new User(2,null,"ausar","00000", UserType.operador,null);
+		Userr v = new Userr();
+		v.setUserId(2);
+		v.setUserName("ausar");
+		v.setUserPassword("0001");
+		v.setUsertype(UserType.operador);
 		us.save(v);
 		
 	}

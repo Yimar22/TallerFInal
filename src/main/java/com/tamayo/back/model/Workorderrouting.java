@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+
 
 /**
  * The persistent class for the workorderrouting database table.
@@ -22,17 +25,19 @@ public class Workorderrouting implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private Integer workorderroutingid;
+	@SequenceGenerator(name = "WORKORDERROUTING_WORKORDERROUTINGID_GENERATOR", allocationSize = 1, sequenceName = "WORKORDERROUTING_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "WORKORDERROUTING_WORKORDERROUTINGID_GENERATOR")
+	private Integer id;
 	
 	public Integer getWorkorderroutingid() {
-		return workorderroutingid;
+		return id;
 	}
 
 	public void setWorkorderroutingid(Integer workorderroutingid) {
-		this.workorderroutingid = workorderroutingid;
+		this.id = workorderroutingid;
 	}
 	
-	private WorkorderroutingPK id;
+	//private WorkorderroutingPK id;
 
 	private BigDecimal actualcost;
 
@@ -79,10 +84,10 @@ public class Workorderrouting implements Serializable {
 		return this.actualstartdate;
 	}
 
-	public WorkorderroutingPK getId() {
+/*	public WorkorderroutingPK getId() {
 		return this.id;
 	}
-
+*/
 	public Location getLocation() {
 		return this.location;
 	}
@@ -123,10 +128,10 @@ public class Workorderrouting implements Serializable {
 		this.actualstartdate = actualstartdate;
 	}
 
-	public void setId(WorkorderroutingPK id) {
+/*	public void setId(WorkorderroutingPK id) {
 		this.id = id;
 	}
-
+*/
 	public void setLocation(Location location) {
 		this.location = location;
 	}

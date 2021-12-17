@@ -16,14 +16,11 @@ import javax.persistence.SequenceGenerator;
  * The persistent class for the unitmeasure database table.
  *
  */
-@Entity
-@NamedQuery(name = "Unitmeasure.findAll", query = "SELECT u FROM Unitmeasure u")
+
 public class Unitmeasure implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "UNITMEASURE_UNITMEASURECODE_GENERATOR", allocationSize = 1, sequenceName = "UNITMEASURE_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UNITMEASURE_UNITMEASURECODE_GENERATOR")
+	
 	private String unitmeasurecode;
 
 	private Timestamp modifieddate;
@@ -32,11 +29,11 @@ public class Unitmeasure implements Serializable {
 
 
 	// bi-directional many-to-one association to Product
-	@OneToMany(mappedBy = "unitmeasure1")
+	//@OneToMany(mappedBy = "unitmeasure1")
 	private List<Product> products1;
 
 	// bi-directional many-to-one association to Product
-	@OneToMany(mappedBy = "unitmeasure2")
+//d	@OneToMany(mappedBy = "unitmeasure2")
 	private List<Product> products2;
 
 	public Unitmeasure() {

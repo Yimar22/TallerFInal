@@ -17,14 +17,11 @@ import javax.persistence.SequenceGenerator;
  * The persistent class for the specialoffer database table.
  *
  */
-@Entity
-@NamedQuery(name = "Specialoffer.findAll", query = "SELECT s FROM Specialoffer s")
+
 public class Specialoffer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "SPECIALOFFER_SPECIALOFFERID_GENERATOR", allocationSize = 1, sequenceName = "SPECIALOFFER_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SPECIALOFFER_SPECIALOFFERID_GENERATOR")
+
 	private Integer specialofferid;
 
 	private String category;
@@ -34,7 +31,7 @@ public class Specialoffer implements Serializable {
 	private Timestamp modifieddate;
 
 	// bi-directional many-to-one association to Specialofferproduct
-	@OneToMany(mappedBy = "specialoffer")
+	//@OneToMany(mappedBy = "specialoffer")
 	private List<Specialofferproduct> specialofferproducts;
 
 	public Specialoffer() {

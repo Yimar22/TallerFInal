@@ -17,14 +17,11 @@ import javax.persistence.SequenceGenerator;
  * The persistent class for the location database table.
  *
  */
-@Entity
-@NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l")
+
 public class Location implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "LOCATION_LOCATIONID_GENERATOR", allocationSize = 1, sequenceName = "LOCATION_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LOCATION_LOCATIONID_GENERATOR")
+	
 	private Integer locationid;
 
 	private BigDecimal availability;
@@ -37,7 +34,7 @@ public class Location implements Serializable {
 
 
 	// bi-directional many-to-one association to Workorderrouting
-	@OneToMany(mappedBy = "location")
+	
 	private List<Workorderrouting> workorderroutings;
 
 	public Location() {

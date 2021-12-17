@@ -15,8 +15,7 @@ import javax.persistence.OneToMany;
  * The persistent class for the specialofferproduct database table.
  *
  */
-@Entity
-@NamedQuery(name = "Specialofferproduct.findAll", query = "SELECT s FROM Specialofferproduct s")
+
 public class Specialofferproduct implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,12 +27,12 @@ public class Specialofferproduct implements Serializable {
 	private Integer rowguid;
 
 	// bi-directional many-to-one association to Salesorderdetail
-	@OneToMany(mappedBy = "specialofferproduct")
+	//@OneToMany(mappedBy = "specialofferproduct")
 	private List<Salesorderdetail> salesorderdetails;
 
 	// bi-directional many-to-one association to Specialoffer
-	@ManyToOne
-	@JoinColumn(name = "specialofferid", insertable = false, updatable = false)
+	//@ManyToOne
+	//@JoinColumn(name = "specialofferid", insertable = false, updatable = false)
 	private Specialoffer specialoffer;
 
 	public Specialofferproduct() {

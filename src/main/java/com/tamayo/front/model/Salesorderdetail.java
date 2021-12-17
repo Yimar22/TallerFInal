@@ -15,8 +15,7 @@ import javax.persistence.NamedQuery;
  * The persistent class for the salesorderdetail database table.
  *
  */
-@Entity
-@NamedQuery(name = "Salesorderdetail.findAll", query = "SELECT s FROM Salesorderdetail s")
+
 public class Salesorderdetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -38,10 +37,7 @@ public class Salesorderdetail implements Serializable {
 	private BigDecimal unitpricediscount;
 
 	// bi-directional many-to-one association to Specialofferproduct
-	@ManyToOne
-	@JoinColumns({
-			@JoinColumn(name = "productid", referencedColumnName = "productid", insertable = false, updatable = false),
-			@JoinColumn(name = "specialofferid", referencedColumnName = "specialofferid", insertable = false, updatable = false) })
+	
 	private Specialofferproduct specialofferproduct;
 
 	public Salesorderdetail() {

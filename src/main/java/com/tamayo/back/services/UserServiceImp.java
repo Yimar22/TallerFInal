@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tamayo.back.model.User;
 import com.tamayo.back.model.UserType;
+import com.tamayo.back.model.Userr;
 import com.tamayo.back.repositories.UserRepository;
 
 
@@ -21,21 +21,21 @@ public class UserServiceImp implements UserService{
 	}
 	
 	@Override
-	public User save(User userr) {		
+	public Userr save(Userr userr) {		
 		return userepo.save(userr);
 	}
 
 	@Override
-	public Optional<User> findById(long id) { 
+	public Optional<Userr> findById(long id) { 
 		return userepo.findById(id);		
 	}
 
-	public Iterable<User> findAll() {
+	public Iterable<Userr> findAll() {
 		return userepo.findAll();
 	}
 
 
-	public void delete(User user) {
+	public void delete(Userr user) {
 		userepo.delete(user);
 
 	}

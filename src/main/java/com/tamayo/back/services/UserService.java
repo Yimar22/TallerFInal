@@ -2,14 +2,14 @@ package com.tamayo.back.services;
 
 import java.util.Optional;
 
-import com.tamayo.back.model.User;
 import com.tamayo.back.model.UserType;
+import com.tamayo.back.model.Userr;
 
 
 public interface UserService {
-	public User save(User userr);
-	public Optional<User> findById(long id);	
-	public Iterable<User> findAll();
-	public void delete(User user);
+	public Userr save(Userr userr);
+	public Optional<Userr> findById(long id);	
+	public Iterable<Userr> findAll();
+	public void delete(Userr user);
 	public UserType[] getTypes();
 }

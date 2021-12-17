@@ -18,14 +18,11 @@ import javax.persistence.SequenceGenerator;
  * The persistent class for the productsubcategory database table.
  *
  */
-@Entity
-@NamedQuery(name = "Productsubcategory.findAll", query = "SELECT p FROM Productsubcategory p")
+
 public class Productsubcategory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@SequenceGenerator(name = "PRODUCTSUBCATEGORY_PRODUCTSUBCATEGORYID_GENERATOR", allocationSize = 1, sequenceName = "PRODUCTSUBCATEGORY_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCTSUBCATEGORY_PRODUCTSUBCATEGORYID_GENERATOR")
+	
 	private Integer productsubcategoryid;
 
 	private Timestamp modifieddate;
@@ -35,12 +32,12 @@ public class Productsubcategory implements Serializable {
 	private Integer rowguid;
 
 	// bi-directional many-to-one association to Product
-	@OneToMany(mappedBy = "productsubcategory")
+	//@OneToMany(mappedBy = "productsubcategory")
 	private List<Product> products;
 
 	// bi-directional many-to-one association to Productcategory
-	@ManyToOne
-	@JoinColumn(name = "productcategoryid")
+//	@ManyToOne
+	//@JoinColumn(name = "productcategoryid")
 	private Productcategory productcategory;
 
 	public Productsubcategory() {

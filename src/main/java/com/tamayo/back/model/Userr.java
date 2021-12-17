@@ -1,7 +1,5 @@
 package com.tamayo.back.model;
 
-
-
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -18,10 +16,8 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@Data
-@AllArgsConstructor
 @NamedQuery(name="Userr.findAll", query="SELECT u FROM Userr u")
-public class User implements Serializable {
+public class Userr implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -47,7 +43,7 @@ public class User implements Serializable {
 	@JoinColumn(name="PERS_PERS_ID")
 	private Person person;
 
-	public User() {
+	public Userr() {
 	}
 
 	public long getUserId() {

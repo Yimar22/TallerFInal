@@ -6,10 +6,14 @@ import java.sql.Timestamp;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 
 /**
  * The persistent class for the salesorderdetail database table.
@@ -20,10 +24,12 @@ import javax.persistence.NamedQuery;
 public class Salesorderdetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	/*
-	@EmbeddedId
-	private SalesorderdetailPK id;
-	*/
+
+	private SalesorderdetailPK SODid;
+	
+	@Id
+	@SequenceGenerator(name = "SALESORDERDETAIL_SALESORDERDETAILID_GENERATOR", allocationSize = 1, sequenceName = "SALESORDERDETAIL_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESORDERDETAIL_SALESORDERDETAILID_GENERATOR")
 	private Integer id;
 	
 	private String carriertrackingnumber;
@@ -38,12 +44,12 @@ public class Salesorderdetail implements Serializable {
 
 	private BigDecimal unitpricediscount;
 
-	/*
+	
 	// bi-directional many-to-one association to Salesorderheader
 	@ManyToOne
 	@JoinColumn(name = "salesorderid", insertable = false, updatable = false)
 	private Salesorderheader salesorderheader;
-	*/
+	
 	// bi-directional many-to-one association to Specialofferproduct
 	@ManyToOne
 	@JoinColumns({
@@ -75,7 +81,7 @@ public class Salesorderdetail implements Serializable {
 	}
 	
 	public Salesorderheader getSalesorderheader() {
-		return null;//this.salesorderheader;
+		return this.salesorderheader;
 	}
 	
 	public Specialofferproduct getSpecialofferproduct() {
@@ -111,7 +117,7 @@ public class Salesorderdetail implements Serializable {
 	}
 	
 	public void setSalesorderheader(Salesorderheader salesorderheader) {
-		//this.salesorderheader = salesorderheader;
+		this.salesorderheader = salesorderheader;
 	}
 	
 	public void setSpecialofferproduct(Specialofferproduct specialofferproduct) {
