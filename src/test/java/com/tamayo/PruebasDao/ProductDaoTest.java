@@ -36,7 +36,7 @@ class ProductDaoTest {
 	@Order(1)
 	public void testDaoSaveProduct() {
 		setup();
-		pDao.Save(product);
+		pDao.save(product);
 		assertEquals(1,pDao.findAll().size(),"The current size does not match with the expected value,"
 				+ "there should be at least one product already saved");
 	}
@@ -45,7 +45,7 @@ class ProductDaoTest {
 	@DisplayName("Delete Case")
 	@Order(2)
 	public void testDaoDeleteProduct() {				
-		pDao.Delete(pDao.findAll().get(0));
+		pDao.delete(pDao.findAll().get(0));
 		assertEquals(0,pDao.findAll().size(),"The current size does not match with the expected value"
 				+ "there shouldn't be any product left");
 	}
@@ -55,10 +55,10 @@ class ProductDaoTest {
 	@Order(3)
 	public void testDaoEditProduct(){
 		setup();
-		pDao.Save(product);
+		pDao.save(product);
 		assertEquals(1,pDao.findById(2).getProductid(),"The current id is not the expected one");
 		product.setProductnumber("TestNewNumber");
-		pDao.Edit(product);
+		pDao.edit(product);
 		assertEquals("TestNewNumber",pDao.findById(2).getProductnumber(),"The current number is not the expected one");
 	}
 	

@@ -53,7 +53,7 @@ class SpecialOfferDaoTest {
 	@Order(1)
 	public void testDaoSaveSpecialofferproduct() throws ParseException {
 		setup();
-		sopdao.Save(specialoffer);
+		sopdao.save(specialoffer);
 		assertEquals(1,sopdao.findAll().size(),"The current size does not match with the expected value,"
 				+ "there should be at least one Specialoffer already saved");
 	}
@@ -62,7 +62,7 @@ class SpecialOfferDaoTest {
 	@DisplayName("Delete Case")
 	@Order(2)
 	public void testDaoDeleteSpecialofferproduct() {				
-		sopdao.Delete(sopdao.findAll().get(0));
+		sopdao.delete(sopdao.findAll().get(0));
 		assertEquals(0,sopdao.findAll().size(),"The current size does not match with the expected value"
 				+ "there shouldn't be any Specialoffer left");
 	}
@@ -72,10 +72,10 @@ class SpecialOfferDaoTest {
 	@Order(3)
 	public void testDaoEditSpecialofferproduct() throws ParseException{
 		setup();
-		sopdao.Save(specialoffer);
+		sopdao.save(specialoffer);
 		assertEquals(5151,sopdao.findById(5151) ,"The current id is not the expected one");
 		specialoffer.setCategory("Categoria3");
-		sopdao.Edit(specialoffer);
+		sopdao.edit(specialoffer);
 		assertEquals("Categoria3", sopdao.findById(5151).getCategory(), "The current category is not the expected one");
 	}
 	

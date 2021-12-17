@@ -39,7 +39,7 @@ class SalesorderdetailDaoTest {
 		orderdetail = new Salesorderdetail();
 		sodpK = new SalesorderdetailPK();
 		sodpK.setSalesorderid(1);
-		orderdetail.setId(sodpK);
+		orderdetail.setId(2);
 		Date date = new Date();
 		Timestamp timestamp = new Timestamp(date.getTime());
 		orderdetail.setModifieddate(timestamp);
@@ -56,7 +56,7 @@ class SalesorderdetailDaoTest {
 	@Order(1)
 	public void testDaoSaveSalesorderdetail() {
 		setup();
-		sodDao.Save(orderdetail);
+		sodDao.save(orderdetail);
 		assertEquals(1,sodDao.findAll().size(),"The current size does not match with the expected value,"
 				+ "there should be at least one orderdetail already saved");
 	}
@@ -65,7 +65,7 @@ class SalesorderdetailDaoTest {
 	@DisplayName("Delete Case")
 	@Order(2)
 	public void testDaoDeleteSalesorderdetail() {				
-		sodDao.Delete(sodDao.findAll().get(0));
+		sodDao.delete(sodDao.findAll().get(0));
 		assertEquals(0,sodDao.findAll().size(),"The current size does not match with the expected value"
 				+ "there shouldn't be any Salesorderdetail left");
 	}
@@ -75,18 +75,18 @@ class SalesorderdetailDaoTest {
 	@Order(3)
 	public void testDaoEditSalesorderdetail(){
 		setup();
-		sodDao.Save(orderdetail);
-		assertEquals(1,sodDao.findById(sodpK).getId() ,"The current id is not the expected one");
+		sodDao.save(orderdetail);
+		assertEquals(1,sodDao.findById(2).getId() ,"The current id is not the expected one");
 		orderdetail.setCarriertrackingnumber("TestNewNumber");
-		sodDao.Edit(orderdetail);
-		assertEquals("TestNewNumber", sodDao.findById(sodpK).getCarriertrackingnumber(), "The current number is not the expected one");
+		sodDao.edit(orderdetail);
+		assertEquals("TestNewNumber", sodDao.findById(2).getId(), "The current number is not the expected one");
 	}
 	
 	@Test
 	@DisplayName("Find By Id Case")
 	@Order(4)
 	public void testDaoFindById() {
-		assertNotNull(sodDao.findById(sodpK));
+		assertNotNull(sodDao.findById(2));
 	}
 	
 	@Test
