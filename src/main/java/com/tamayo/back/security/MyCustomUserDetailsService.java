@@ -28,12 +28,10 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		List<Userr> users = userRepository.findByUsername(username);
+		Userr users = userRepository.findByUsername(username);
 		
 		if (users != null) {
-			log.info("found");
-			Userr userApp = users.get(0);
-			User.UserBuilder builder = User.withUsername(username).password(userApp.getUserPassword()).roles(userApp.getUsertype().toString());
+			User.UserBuilder builder = User.withUsername(username).password(users.getUserPassword()).roles(users.getUsertype().toString());
 			return builder.build();
 		} else {
 			log.info("not found");

@@ -10,5 +10,5 @@ import com.tamayo.back.model.Userr;
 
 @RepositoryRestResource
 public interface UserRepository extends CrudRepository<Userr,Long>{
-	List<Userr> findByUsername(String username);
+	Userr findByUsername(String username);
 }
