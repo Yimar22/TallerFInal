@@ -39,7 +39,7 @@ class SpecialofferproductDaoTest {
 	@Order(1)
 	public void testDaoSaveSpecialofferproduct() {
 		setup();
-		sopdao.Save(sop);
+		sopdao.save(sop);
 		assertEquals(1,sopdao.findAll().size(),"The current size does not match with the expected value,"
 				+ "there should be at least one Specialofferproduct already saved");
 	}
@@ -48,7 +48,7 @@ class SpecialofferproductDaoTest {
 	@DisplayName("Delete Case")
 	@Order(2)
 	public void testDaoDeleteSpecialofferproduct() {				
-		sopdao.Delete(sopdao.findAll().get(0));
+		sopdao.delete(sopdao.findAll().get(0));
 		assertEquals(0,sopdao.findAll().size(),"The current size does not match with the expected value"
 				+ "there shouldn't be any Specialofferproduct left");
 	}
@@ -58,11 +58,11 @@ class SpecialofferproductDaoTest {
 	@Order(3)
 	public void testDaoEditSpecialofferproduct(){
 		setup();
-		sopdao.Save(sop);
+		sopdao.save(sop);
 		assertEquals(1,sopdao.findById(sopPK).getId() ,"The current id is not the expected one");
 		sopPK.setSpecialofferid(2010);
 		sop.setId(sopPK);
-		sopdao.Edit(sop);
+		sopdao.edit(sop);
 		assertEquals(sopPK, sopdao.findById(sopPK).getId(), "The current id is not the expected one");
 	}
 	
