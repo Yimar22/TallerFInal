@@ -7,14 +7,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.back.model.Salesorderdetail;
-import com.tamayo.back.model.SpecialofferproductPK;
-
-
+import com.tamayo.front.model.Salesorderdetail;
 
 public interface SalesOrderDetailController {
 	public String indexSalesOrderDetail(Model model);
-	public String addSalesOrderDetail(Model model);
+	public String addSalesOrderDetail(Model model, @ModelAttribute("salesorderdetail") Salesorderdetail salesorderdetail);
 	public String saveSalesOrderDetail(@ModelAttribute("salesOrderDetail") @Validated Salesorderdetail sod, BindingResult result, Model model, @RequestParam(value = "action", required = true) String action);
 	public String deleteSalesOrderDetail(@PathVariable("id1")Integer id1, @PathVariable("id2") Integer id2, Model model);
 	public String editSalesOrderDetail(@PathVariable("id1") Integer id1, @PathVariable("id2") Integer id2, Model model);

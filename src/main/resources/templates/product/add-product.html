@@ -85,25 +85,7 @@
 									th:selected="${product.unitmeasure1=unitmeasure1}"></option>
 							</select>
 						</div>
-						
-						<div class="form-group col-md-6">
-							<label for="weight" class="col-form-label">Peso</label> <input
-								type="text" th:field="*{weight}" class="form-control" id="weight"
-								placeholder="3"th:value="${product.weight}"> <span
-								th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"
-								class="text-danger"></span>
-						</div>
-						
-						<div class="form-group col-md-6">
-							<label for="unitmeasure2" class="col-form-label">Unidad de medida del peso</label> <select
-								class="form-control-range" th:field="*{unitmeasure2}">
-								<!-- Aqui sucede la magia --> 
-								<option th:each="unitmeasure2 : ${unitmeasure2s}" th:value="${unitmeasure2.unitmeasurecode}"
-									class="form-control" th:text="${unitmeasure2.name}"
-									th:selected="${product.unitmeasure2=unitmeasure2}"></option>
-							</select>
-						</div>
-						
+
 						<div class="form-group col-md-6">
 							<label for="productsubcategory" class="col-form-label">Subcategoria</label> <select
 								class="form-control-range" th:field="*{productsubcategory}">

@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.back.model.Salesorderdetail;
-import com.tamayo.back.model.SalesorderdetailPK;
-import com.tamayo.back.model.Specialofferproduct;
-import com.tamayo.back.model.SpecialofferproductPK;
+
 import com.tamayo.front.businessdelegate.BusinessDelegate;
 import com.tamayo.front.controller.interfaces.SpecialOfferProductController;
+import com.tamayo.front.model.Specialofferproduct;
+import com.tamayo.front.model.SpecialofferproductPK;
 
 import lombok.extern.java.Log;
 

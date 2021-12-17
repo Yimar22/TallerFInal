@@ -44,30 +44,18 @@ public class TallerFinalApplication {
 				
 				setDefaultSubcategories(productSubcategoryService);
 				setDefaultUnitMeasures1(unitMeasureService);
-				setDefaultUnitMeasures2(unitMeasureService);
 		};
-	}
-
-	private void setDefaultUnitMeasures2(UnitMeasureService unitMeasureService) {
-		Unitmeasure umP1 = new Unitmeasure();
-		umP1.setUnitmeasurecode("kg");
-		umP1.setName("kg");
-		unitMeasureService.saveUnitMeasure1(umP1);
-		Unitmeasure umP2 = new Unitmeasure();
-		umP2.setUnitmeasurecode("gr");
-		umP2.setName("gr");
-		unitMeasureService.saveUnitMeasure1(umP2);
 	}
 
 	private void setDefaultUnitMeasures1(UnitMeasureService unitMeasureService) {
 		Unitmeasure umT1 = new Unitmeasure();
 		umT1.setUnitmeasurecode("cm");
 		umT1.setName("cm");
-		unitMeasureService.saveUnitMeasure2(umT1);
+		unitMeasureService.saveUnitMeasure1(umT1);
 		Unitmeasure umT2 = new Unitmeasure();
 		umT2.setUnitmeasurecode("mm");
 		umT2.setName("mm");
-		unitMeasureService.saveUnitMeasure2(umT2);
+		unitMeasureService.saveUnitMeasure1(umT2);
 	}
 
 	private void setDefaultSubcategories(ProductSubCategoryService productSubcategoryService) {

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.back.model.Specialoffer;
 import com.tamayo.front.businessdelegate.BusinessDelegate;
 import com.tamayo.front.controller.interfaces.SpecialOfferController;
+import com.tamayo.front.model.Specialoffer;
 
 @Controller
 public class SpecialOfferControllerImp  implements SpecialOfferController{
@@ -35,7 +35,6 @@ public class SpecialOfferControllerImp  implements SpecialOfferController{
 	
 	@GetMapping("/specioff/add")
 	public String addSpecialOffer(Model model) {
-		model.addAttribute("specialOffer", new Specialoffer());
 		return "specioff/add-specioff";
 	}
 	
