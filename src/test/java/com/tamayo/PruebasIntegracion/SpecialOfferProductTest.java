@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.tamayo.Application.Taller1YimarTamayoApplication;
+import com.tamayo.Application.TallerFinalApplication;
 import com.tamayo.back.daos.SpecialofferproductDao;
 import com.tamayo.back.model.Specialofferproduct;
 import com.tamayo.back.model.SpecialofferproductPK;
@@ -23,7 +23,7 @@ import com.tamayo.back.services.SpecialOfferProductServiceImp;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes= Taller1YimarTamayoApplication.class)
+@ContextConfiguration(classes= TallerFinalApplication.class)
 class SpecialOfferProductTest {
 
 	@Autowired

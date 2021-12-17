@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.back.model.Workorder;
+import com.tamayo.front.model.Workorder;
+
+
 
 public interface WorkorderController {
 	public String index(@RequestParam(required = false, value = "id") Integer id,

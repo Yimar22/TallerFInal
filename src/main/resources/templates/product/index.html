@@ -35,7 +35,6 @@
 								<th>Unidad de medida T</th>
 								<th>Peso</th>
 								<th>Unidad de medida P</th>
-								<th>Categoria</th>
 								<th>Subcategoria</th>
 								<th>Editar</th>
 								<th>Borrar</th>							
@@ -50,10 +49,7 @@
 								<td th:text="${product.sellstartdate}"></td>
 								<td th:text="${product.sellenddate}"></td>
 								<td th:text="${product.size}"></td>
-								<td><a th:text="${product.unitmeasure1.name}" th:href="@{/unitmeasure1s?id={id}(id=${product.unitmeasure1.unitmeasurecode})}"></a></td>
-								<td th:text="${product.weight}"></td>								
-								<td><a th:text="${product.unitmeasure2.name}" th:href="@{/unitmeasure2s?id={id}(id=${product.unitmeasure2.unitmeasurecode})}"></a></td>								
-								<td><a th:text="${product.productsubcategory.productcategory.name}" th:href="@{/productsubcategorys?id={id}(id=${product.productsubcategory.productsubcategoryid})}"></a></td>
+								<td><a th:text="${product.unitmeasure1.name}" th:href="@{/unitmeasure1s?id={id}(id=${product.unitmeasure1.unitmeasurecode})}"></a></td>							
 								<td><a th:text="${product.productsubcategory.name}" th:href="@{/productsubcategorys?id={id}(id=${product.productsubcategory.productsubcategoryid})}"></a></td>
 								<td><a th:href="@{/prod/edit/{id}(id=${prod.productid})}"
 									class="btn btn-primary"><i class="fas fa-calendar ml-2"></i></a></td>

@@ -21,8 +21,11 @@ public interface BusinessDelegate {
 	
 	public Product productFindById(Integer id);
 	
-	public void productDelete(Integer id);
+	public void productDelete(Product product);
 	
+	public Productsubcategory productsubcategory_save(Productsubcategory productsubcategory);
+	
+	public Unitmeasure unitmeasure1_save(Unitmeasure unitmeasure);
 	 // ==========================
     // SALES ORDER DETAIL
     // ==========================
@@ -89,4 +92,8 @@ public interface BusinessDelegate {
 	void workorderrouting_delete(Workorderrouting workorderrouting);
 	Workorderrouting workorderrouting_findById(Integer id);
 	void editWorkorderrouting(Workorderrouting workorderrouting);
+
+	public List<Productsubcategory> findAllProductsubcategories();
+
+	public List<Unitmeasure> findAllUnitMeasures();
 }

@@ -13,8 +13,11 @@ import com.tamayo.front.model.*;
 public class BusinessDelegateImp implements BusinessDelegate {
 	
 	public static final String REST_URL = "http://localhost:8080/api";
+	private final static String PRODUCT_SUBCATEGORY_URL = REST_URL+"/productsubcategorys/";
+	private final static String UNITMEASURE_URL = REST_URL+"/unitmeasure1s/";
 	private final static String WORK_ORDER_URL = REST_URL+"/workorders/";
 	private final static String WORK_ORDER_ROUTING_URL = REST_URL+"/workorderroutings/";
+	private final static String PRODUCT_URL=REST_URL+"/products/";
 
 	private RestTemplate restTemplate;
 	
@@ -29,40 +32,47 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	
 	@Override
 	public List<Product> productFindAll() {
-		String url = REST_URL + "product/";
-		Product[] product = restTemplate.getForObject(url, Product[].class);
+		Product[] product = restTemplate.getForObject(PRODUCT_URL, Product[].class);
 		List<Product> result = Arrays.asList(product);
 		return result;
 	}
 
 	@Override
 	public void productSave(Product product) {
-		String url = REST_URL + "/product/save";
-		restTemplate.postForObject(url, product, Product.class);
+		HttpEntity<Product> request = new HttpEntity<>(product);
+		restTemplate.postForObject(PRODUCT_URL, request, Product.class);
 		
 	}
 
 	@Override
 	public void productEdit(Product product) {
-		String url = REST_URL + "product/edit";
-		restTemplate.put(url, product, Product.class);
+		restTemplate.put(PRODUCT_URL, product, Product.class);
 	}
 
 	@Override
 	public Product productFindById(Integer id) {
-		String url = REST_URL + "product/show/" + id;
-		
-		Product product = restTemplate.getForObject(url, Product.class); 
-		
-		return product;
+		return restTemplate.getForObject(PRODUCT_URL+id, Product.class);
 	}
 
 	@Override
-	public void productDelete(Integer id) {
-		String url = REST_URL + "product/delete/" + id;
-		restTemplate.delete(url);
+	public void productDelete(Product product) {
+		restTemplate.delete(PRODUCT_URL+product.getProductid());
 	}
 	
+	@Override
+	public Productsubcategory productsubcategory_save(Productsubcategory productsubcategory) {
+		HttpEntity<Productsubcategory> request = new HttpEntity<>(productsubcategory);
+		return restTemplate.postForObject(PRODUCT_SUBCATEGORY_URL, request, Productsubcategory.class);
+	}
+
+
+	@Override
+	public Unitmeasure unitmeasure1_save(Unitmeasure unitmeasure) {
+		HttpEntity<Unitmeasure> request = new HttpEntity<>(unitmeasure);
+		return restTemplate.postForObject(UNITMEASURE_URL, request, Unitmeasure.class);
+	}
+	
+
 
 	//------------------------------------------------------------------
 	//							Salesorderdetail
@@ -283,6 +293,23 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	public void editWorkorderrouting(Workorderrouting workorderrouting) {
 		restTemplate.put(WORK_ORDER_ROUTING_URL, workorderrouting, Workorderrouting.class);
 	}
+
+
+	@Override
+	public List<Productsubcategory> findAllProductsubcategories() {
+		Productsubcategory[] array = restTemplate.getForObject(PRODUCT_SUBCATEGORY_URL, Productsubcategory[].class);
+		return Arrays.asList(array);
+	}
+
+
+	@Override
+	public List<Unitmeasure> findAllUnitMeasures() {
+		Unitmeasure[] array = restTemplate.getForObject(UNITMEASURE_URL, Unitmeasure[].class);
+		return Arrays.asList(array);
+	}
+
+
+
 	
 
 	

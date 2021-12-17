@@ -9,10 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.tamayo.back.daos.ProductDao;
 import com.tamayo.back.model.Product;
-import com.tamayo.back.repositories.ProductModelRepository;
 import com.tamayo.back.repositories.ProductRepository;
 import com.tamayo.back.repositories.ProductSubCategoryRepository;
-import com.tamayo.back.repositories.UnitMeasureRepository;
+import com.tamayo.back.repositories.UnitMeasureRepository1;
 import com.tamayo.back.model.Product;
 import com.tamayo.back.model.Productmodel;
 import com.tamayo.back.model.Productsubcategory;
@@ -28,23 +27,20 @@ public class ProductServiceImp implements ProductService{
 	private ProductDao productDao;
 	private ProductSubCategoryRepository productSubcategoryRepository;
 	private ProductRepository productRepository;
-	private UnitMeasureRepository unitMeasureRepository;
-	private ProductModelRepository productModelRepository;
+	private UnitMeasureRepository1 unitMeasureRepository;
 	
 	
 	@Autowired
-	public ProductServiceImp(ProductDao productDao, ProductSubCategoryRepository productSubcategoryRepository, ProductRepository productRepository, UnitMeasureRepository unitMeasureRepository, ProductModelRepository productModelRepository) {
+	public ProductServiceImp(ProductDao productDao, ProductSubCategoryRepository productSubcategoryRepository, ProductRepository productRepository, UnitMeasureRepository1 unitMeasureRepository) {
 		this.productDao= productDao;
 		this.productSubcategoryRepository = productSubcategoryRepository;
 		this.productRepository = productRepository; 
 		this.unitMeasureRepository = unitMeasureRepository;
-		this.productModelRepository = productModelRepository;
 	}
-	
 	
 	@Override
 	public Product saveProduct(Product product){
-		if(product == null || product.getProductmodel() == null || product.getProductsubcategory() == null || product.getUnitmeasure1() == null || product.getUnitmeasure2() == null || !productModelRepository.existsById(product.getProductmodel().getProductmodelid()) || !productSubcategoryRepository.existsById(product.getProductsubcategory().getProductsubcategoryid()) || !unitMeasureRepository.existsById(product.getUnitmeasure1().getUnitmeasurecode()) || !unitMeasureRepository.existsById(product.getUnitmeasure2().getUnitmeasurecode())) {
+		if(product == null || product.getProductmodel() == null || product.getProductsubcategory() == null || product.getUnitmeasure1() == null || product.getUnitmeasure2() == null || !productSubcategoryRepository.existsById(product.getProductsubcategory().getProductsubcategoryid()) || !unitMeasureRepository.existsById(product.getUnitmeasure1().getUnitmeasurecode()) || !unitMeasureRepository.existsById(product.getUnitmeasure2().getUnitmeasurecode())) {
 			return null;
 		}
 		boolean result = product.getProductnumber() != null && product.getSellstartdate().before(product.getSellenddate()) && product.getDaystomanufacture() > 0;

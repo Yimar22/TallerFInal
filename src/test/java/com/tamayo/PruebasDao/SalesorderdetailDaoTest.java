@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.tamayo.Application.Taller1YimarTamayoApplication;
+import com.tamayo.Application.TallerFinalApplication;
 import com.tamayo.back.daos.SalesorderdetailDao;
 import com.tamayo.back.model.Businessentity;
 import com.tamayo.back.model.Product;
@@ -23,7 +23,7 @@ import com.tamayo.back.model.Salesorderdetail;
 import com.tamayo.back.model.SalesorderdetailPK;
 
 @SpringBootTest
-@ContextConfiguration(classes= Taller1YimarTamayoApplication.class)
+@ContextConfiguration(classes= TallerFinalApplication.class)
 @TestMethodOrder(OrderAnnotation.class)
 class SalesorderdetailDaoTest {
 	

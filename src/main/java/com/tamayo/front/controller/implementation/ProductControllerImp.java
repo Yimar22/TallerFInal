@@ -1,6 +1,9 @@
 package com.tamayo.front.controller.implementation;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,98 +18,90 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tamayo.back.model.Product;
 import com.tamayo.front.businessdelegate.BusinessDelegate;
 import com.tamayo.front.controller.interfaces.ProductController;
+import com.tamayo.front.model.Product;
 
 
 
 @Controller
-@RequestMapping("/front/Product")
+@RequestMapping("/products")
 public class ProductControllerImp implements ProductController{
 	
+	private ArrayList<String> logicalOperands;
+	
+	@Autowired
 	private BusinessDelegate businessDelegate;
-
-	@Autowired	
-	public ProductControllerImp(BusinessDelegate businessDelegate) {
-		this.businessDelegate = businessDelegate;
+	
+	public ProductControllerImp() {
+		logicalOperands = new ArrayList<>();
+		logicalOperands.add("AND");
+		logicalOperands.add("OR");
+		logicalOperands.add("XOR");
+		logicalOperands.add("NOT");
+		logicalOperands.add("NOR");
+		logicalOperands.add("NAND");
 	}
 		
-	@GetMapping("/prod/")
+	@GetMapping
 	public String indexProduct(Model model) {
-		model.addAttribute("prods", businessDelegate.productFindAll());
-		return "prod/index";
+		model.addAttribute("products", businessDelegate.productFindAll());
+		return "/products/index";
 	}
 	
-	@GetMapping("/prod/add")
-    public String addProduct(Model model) {
-        model.addAttribute("prod", new Product());
-		//model.addAttribute("prod", businessDelegate.productFindAll());
-		//model.addAttribute("prodsubcats", productSubcategoryService.findAll() );
-	    //model.addAttribute("prodmods", productModelService.findAll() );
-	    //model.addAttribute("unitme1s", unitMeasureService.findAll() );
-	    //model.addAttribute("unitme2s", unitMeasureService.findAll() );
-        return "prod/add-prod";
-        		
+	@GetMapping("/add")
+    public String addProduct(Model model, @ModelAttribute("product") Product product) {
+		model.addAttribute("subcategories", businessDelegate.findAllProductsubcategories());
+	    model.addAttribute("unitme1s", businessDelegate.findAllUnitMeasures() );
+        return "/products/add-product";		
     }
 
-	
-	//NOTA: HACER EL VALIDATED
-	@PostMapping("/prod/add")
-    public String saveProduct(@Validated Product product, BindingResult bindingResult, Model model,
+	@PostMapping("/add")
+    public String saveProduct(@ModelAttribute("product") @Validated Product product, BindingResult bindingResult, Model model,
     		@RequestParam(value = "action", required = true) String action) {
         if(!action.equals("Cancel")) {
             if(bindingResult.hasErrors()) {
-                model.addAttribute("prod", businessDelegate.productFindAll());
-         //       model.addAttribute("prodsubcats", productSubcategoryService.findAll() );
-         //       model.addAttribute("prodmods", productModelService.findAll() );
-         //       model.addAttribute("unitme1s", unitMeasureService.findAll() );
-         //       model.addAttribute("unitme2s", unitMeasureService.findAll() );
+                model.addAttribute("product", businessDelegate.productFindAll());
+                model.addAttribute("prodsubcategories", businessDelegate.findAllProductsubcategories() );
+                model.addAttribute("unitme1s", businessDelegate.findAllUnitMeasures() );
                 return "prod/add-prod";
             }else {
             businessDelegate.productSave(product);
            }
         }
-        return "redirect:/prod/";
+        return "redirect:/products/";
         
     }
 	
-	@GetMapping("prod/del{id}")
+	@GetMapping("/del/{id}")
 	public String deleteProduct(@PathVariable("id") Integer id, Model model) {
 		Product prod = businessDelegate.productFindById(id);
-		businessDelegate.productDelete(prod.getProductid());
-		return "redirect:/prod/";
+		businessDelegate.productDelete(prod);
+		return "redirect:/products/";
 	}
 	
-	@GetMapping("/prod/edit/{id}")
+	@GetMapping("/edit/{id}")
 	public String editProduct(@PathVariable("id") Integer id, Model model) {
 		Product prod = businessDelegate.productFindById(id);
-		if (prod == null) 
-			throw new IllegalArgumentException("Invalid prod Id:" + id);
-		model.addAttribute("prod", prod);
-		//model.addAttribute("unitme1s", unitMeasureService.findAll());
-		//model.addAttribute("unitme2s", unitMeasureService.findAll());
-		//model.addAttribute("prodsubcats", productSubcategoryService.findAll());
-		//model.addAttribute("prodmods", productModelService.findAll());
-		return "prod/update-prod";
+		model.addAttribute("product", prod);
+		model.addAttribute("productsubcategories", businessDelegate.findAllProductsubcategories());
+		model.addAttribute("unitme1s", businessDelegate.findAllUnitMeasures());
+		return "products/update-product";
 	}
 	
 	//NOTA: HACER EL VALIDATED
-	@PostMapping("prod/edit/{id}")
+	@PostMapping("/edit/{id}")
 	public String updateProduct(@PathVariable("id") Integer id, @RequestParam(value = "action", required = true) String action, 
 			 @Validated Product product, BindingResult bindingResult, Model model) {
 		if(action != null && !action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				model.addAttribute("prod", product);
-			//	model.addAttribute("unitme1s", unitMeasureService.findAll());
-			//  model.addAttribute("unitme2s", unitMeasureService.findAll());
-			//	model.addAttribute("prodsubcats", productSubcategoryService.findAll());
-			//	model.addAttribute("prodmods", productModelService.findAll());	
-				return "prod/update-prod";
+				model.addAttribute("productsubcategories", businessDelegate.findAllProductsubcategories());
+				model.addAttribute("unitme1s", businessDelegate.findAllUnitMeasures());
+				return "products/update-product";
 			}
 			businessDelegate.productEdit(product);
 		}
-		return "redirect:/prod/";
+		return "redirect:/products/";
 		
 	}
 	
