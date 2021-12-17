@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * The persistent class for the workorderrouting database table.
  *
@@ -19,7 +21,17 @@ import javax.persistence.NamedQuery;
 public class Workorderrouting implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
+	@Id
+	private Integer workorderroutingid;
+	
+	public Integer getWorkorderroutingid() {
+		return workorderroutingid;
+	}
+
+	public void setWorkorderroutingid(Integer workorderroutingid) {
+		this.workorderroutingid = workorderroutingid;
+	}
+	
 	private WorkorderroutingPK id;
 
 	private BigDecimal actualcost;

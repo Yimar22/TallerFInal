@@ -18,6 +18,7 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	private final static String WORK_ORDER_URL = REST_URL+"/workorders/";
 	private final static String WORK_ORDER_ROUTING_URL = REST_URL+"/workorderroutings/";
 	private final static String PRODUCT_URL=REST_URL+"/products/";
+	private final static String LOCATION_URL=REST_URL+"/locations/";
 
 	private RestTemplate restTemplate;
 	
@@ -305,6 +306,13 @@ public class BusinessDelegateImp implements BusinessDelegate {
 	@Override
 	public List<Unitmeasure> findAllUnitMeasures() {
 		Unitmeasure[] array = restTemplate.getForObject(UNITMEASURE_URL, Unitmeasure[].class);
+		return Arrays.asList(array);
+	}
+
+
+	@Override
+	public Object location_findAll() {
+		Location[] array = restTemplate.getForObject(LOCATION_URL, Location[].class);
 		return Arrays.asList(array);
 	}
 

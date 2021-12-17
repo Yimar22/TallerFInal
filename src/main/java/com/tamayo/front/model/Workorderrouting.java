@@ -10,6 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import org.springframework.data.annotation.Id;
+
+import com.tamayo.front.model.Location;
+
 /**
  * The persistent class for the workorderrouting database table.
  *
@@ -18,8 +22,18 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = "Workorderrouting.findAll", query = "SELECT w FROM Workorderrouting w")
 public class Workorderrouting implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	private Integer workorderroutingid;
+	
+	public Integer getWorkorderroutingid() {
+		return workorderroutingid;
+	}
 
-	@EmbeddedId
+	public void setWorkorderroutingid(Integer workorderroutingid) {
+		this.workorderroutingid = workorderroutingid;
+	}
+
 	private WorkorderroutingPK id;
 
 	private BigDecimal actualcost;
@@ -38,7 +52,20 @@ public class Workorderrouting implements Serializable {
 
 	private Timestamp scheduledstartdate;
 
+	
+	// bi-directional many-to-one association to Location
+	@ManyToOne
+	@JoinColumn(name = "locationid", insertable = false, updatable = false)
+	private Location location;
 
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	public Location getLocation() {
+		return this.location;
+	}
+	
 	// bi-directional many-to-one association to Workorder
 	@ManyToOne
 	@JoinColumn(name = "workorderid", insertable = false, updatable = false)

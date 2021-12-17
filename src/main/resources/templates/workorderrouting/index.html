@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Enrutamiento de ordenes de trabajo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div th:switch="${workorderroutings.isEmpty()}" class="container my-5">
+		<div class="row">
+			<div class="col-md-10">
+				<h2 th:case="true">Ningun enrutamiento de orden de trabajo ha sido registrado aun!</h2>
+				<div th:case="false">
+					<h2 class="my-5">Enrutamientos de ordenes de trabajo</h2>
+					<table class="table table-striped table-responsive-md">
+						<thead>
+							<tr>
+								<th>Id enrutamiento</th>
+								<th>Id orden</th>
+								<th>Costo real</th>
+								<th>Fecha final definitiva</th>
+								<th>Horas disponibles real</th>
+								<th>Fecha inicio definitivo</th>
+								<th>Fecha modificacion</th>
+								<th>Costo esperado</th>
+								<th>Fecha final programado</th>
+								<th>Fecha inicio programado</th>
+								<th>Id localizacion</th>								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="workorderrouting : ${workorderroutings}">
+								<td th:text="${workorderrouting.workorderroutingid}"></td>
+								<td><a th:text="${workorderrouting.workorder.workorderid}" th:href="@{/workorders/?id={id}(id=${workorderrouting.workorder.workorderid})}"></a></td>
+								<td th:text="${workorderrouting.actualcost}"></td>
+								<td th:text="${workorderrouting.actualenddate}"></td>
+								<td th:text="${workorderrouting.actualresourcehrs}"></td>
+								<td th:text="${workorderrouting.actualstartdate}"></td>
+								<td th:text="${workorderrouting.modifieddate}"></td>
+								<td th:text="${workorderrouting.plannedcost}"></td>	
+								<td th:text="${workorderrouting.scheduledenddate}"></td>
+								<td th:text="${workorderrouting.scheduledstartdate}"></td>								
+								<td><a th:text="${workorderrouting.location.locationid}" th:href="@{/locations/?id={id}(id=${workorderrouting.location.locationid})}"></a></td>
+								
+								<td><a th:href="@{/workorder/edit/{id}(id=${workorder.workorderid})}"
+									class="btn btn-primary"><i class="fas fa-calendar ml-2"></i></a></td>
+								<td><a th:href="@{/workorder/del/{id}(id=${workorder.workorderid})}"
+									class="btn btn-primary"><i class="fas fa-trash ml-2"x></i></a></td>
+						</tbody>
+					</table>
+				</div>
+				<p class="my-5">
+					<a href="/prod/add" class="btn btn-primary"><i
+						class="fas fa-calendar-plus ml-2"></i></a>
+				</p>
+				
+			</div>
+		</div>
+		<p>
+			<a href="/"><i class="fas fa-home ml-2"></i> Atras</a>
+		</p>
+	</div>
+</body>
+</html>

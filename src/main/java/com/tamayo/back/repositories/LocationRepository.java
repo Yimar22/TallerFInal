@@ -1,15 +1,11 @@
 package com.tamayo.back.repositories;
 
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import com.tamayo.back.model.Unitmeasure;
-
+import com.tamayo.back.model.Location;
 
 @RepositoryRestResource
-public interface UnitMeasureRepository1 extends CrudRepository<Unitmeasure, String>{
-
-	
+public interface LocationRepository extends CrudRepository<Location, Integer>{
 
 }

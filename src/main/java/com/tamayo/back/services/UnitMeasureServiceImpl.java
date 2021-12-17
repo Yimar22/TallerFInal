@@ -1,10 +1,8 @@
 package com.tamayo.back.services;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tamayo.back.model.Unitmeasure;
@@ -12,60 +10,64 @@ import com.tamayo.back.repositories.UnitMeasureRepository1;
 
 
 @Service
-public class UnitMeasureServiceImpl implements UnitMeasureService {
+public class UnitMeasureServiceImpl {
 
 	private UnitMeasureRepository1 unitMeasureRepository1;
 	
 
-	@Autowired
 	public UnitMeasureServiceImpl(UnitMeasureRepository1 unitMeasureRepository1) {
-		super();
 		this.unitMeasureRepository1 = unitMeasureRepository1;
 	}
 	
-	@Override
 	public Unitmeasure saveUnitMeasure1(Unitmeasure unitMeasure) {
-		if(unitMeasure == null)
-			return null;
 		return unitMeasureRepository1.save(unitMeasure);
 	}
 	
-	@Override
-	@Transactional
-	public Unitmeasure upddateUnitMeasure1(Unitmeasure unitMeasure) {
-		if(unitMeasure == null)
-			return null;
-		Unitmeasure um = unitMeasureRepository1.findById(unitMeasure.getUnitmeasurecode()).get();
-		um.setName(unitMeasure.getName());
-		um.setModifieddate(unitMeasure.getModifieddate());
-		return unitMeasure;
+	public Iterable<Unitmeasure> saveAll(Iterable<Unitmeasure> locs){
+		for(Unitmeasure loc:locs) {
+			saveUnitMeasure1(loc);
+		}
+		return locs;
 	}
 	
-
+	public Optional<Unitmeasure> findById1(String unitMeasureCode) {
+		return unitMeasureRepository1.findById(unitMeasureCode);
+	}
 	
-	@Override
 	public boolean existsById1(String unitMeasureCode) {
 		return unitMeasureRepository1.existsById(unitMeasureCode);
 	}
-
-	@Override
+	
 	public Iterable<Unitmeasure> findAll1() {
 		return unitMeasureRepository1.findAll();
 	}
 	
-
-	
-	@Override
-	public Optional<Unitmeasure> findById1(String unitMeasureCode) {
-		return unitMeasureRepository1.findById(unitMeasureCode);
+	public long count() {
+		return unitMeasureRepository1.count();
 	}
-
-
 	
-	@Override
+	public void deleteById(String code) {
+		unitMeasureRepository1.deleteById(code);
+	}
+	
 	public void delete1(Unitmeasure unitmeasure) {
-		unitMeasureRepository1.delete(unitmeasure);
+		deleteById(unitmeasure.getUnitmeasurecode());
 	}
-
+	
+	public void deleteAll(Iterable<Unitmeasure> locs) {
+		unitMeasureRepository1.deleteAll(locs);
+	}
+	
+	public void deleteAll() {
+		unitMeasureRepository1.deleteAll();
+	}
+	
+	public void editUnitMeasure1(String id, String name) {
+		Unitmeasure um = findById1(id).get();
+		um.setName(name);
+		um.setModifieddate(new Timestamp(System.currentTimeMillis()));
+		unitMeasureRepository1.save(um);
+	}
+	
 	
 }

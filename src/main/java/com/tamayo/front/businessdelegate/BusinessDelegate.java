@@ -96,4 +96,6 @@ public interface BusinessDelegate {
 	public List<Productsubcategory> findAllProductsubcategories();
 
 	public List<Unitmeasure> findAllUnitMeasures();
+
+	public Object location_findAll();
 }

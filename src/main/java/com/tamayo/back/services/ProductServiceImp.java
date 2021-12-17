@@ -40,12 +40,13 @@ public class ProductServiceImp implements ProductService{
 	
 	@Override
 	public Product saveProduct(Product product){
-		if(product == null || product.getProductmodel() == null || product.getProductsubcategory() == null || product.getUnitmeasure1() == null || product.getUnitmeasure2() == null || !productSubcategoryRepository.existsById(product.getProductsubcategory().getProductsubcategoryid()) || !unitMeasureRepository.existsById(product.getUnitmeasure1().getUnitmeasurecode()) || !unitMeasureRepository.existsById(product.getUnitmeasure2().getUnitmeasurecode())) {
+		if(product == null || product.getProductsubcategory() == null || product.getUnitmeasure1() == null || !productSubcategoryRepository.existsById(product.getProductsubcategory().getProductsubcategoryid()) || !unitMeasureRepository.existsById(product.getUnitmeasure1().getUnitmeasurecode())) {
 			return null;
 		}
 		boolean result = product.getProductnumber() != null && product.getSellstartdate().before(product.getSellenddate()) && product.getDaystomanufacture() > 0;
-		if(!result)return null;
-		product = productRepository.save(product);
+		if(!result) {
+			return null;
+		}
 		productDao.save(product);
 		return product;
 	}

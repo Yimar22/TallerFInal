@@ -1,6 +1,5 @@
 package com.tamayo.back.restController.implementation;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,39 +11,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tamayo.back.daos.UnitmeasureDao;
 import com.tamayo.back.model.Unitmeasure;
+import com.tamayo.back.repositories.UnitMeasureRepository1;
 
 @RestController
 @RequestMapping("/api/unitmeasures")
 public class UnitmeasureRestControllerImpl {
 	
 	@Autowired
-	UnitmeasureDao unitmeasureDao;
+	UnitMeasureRepository1 unitmeasureRepo;
 	
 	@GetMapping
-	public List<Unitmeasure> getUnitmeasures(){
-		return unitmeasureDao.getAll();
+	public Iterable<Unitmeasure> getUnitmeasures(){
+		return unitmeasureRepo.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Unitmeasure getbyId(@PathVariable("id")String id) {
-		return unitmeasureDao.get(id).orElseThrow(() ->  new IllegalArgumentException("Invalid id"));
+	public Unitmeasure findUnitmeasureById(@PathVariable("id")String id) {
+		return unitmeasureRepo.findById(id).orElseThrow(() ->  new IllegalArgumentException("Invalid id"));
 	}
 	
 	@PostMapping
 	public void addUnitmeasure(@RequestBody Unitmeasure unitmeasure) {
-		unitmeasureDao.save(unitmeasure);
+		unitmeasureRepo.save(unitmeasure);
 	}
 	
 	@PutMapping
 	public void updateUnitmeasure(@RequestBody Unitmeasure unitmeasure) {
-		unitmeasureDao.update(unitmeasure);
+		unitmeasureRepo.save(unitmeasure);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") String id) {
-		unitmeasureDao.deleteById(id);
+		unitmeasureRepo.deleteById(id);
 	}
 	
 }

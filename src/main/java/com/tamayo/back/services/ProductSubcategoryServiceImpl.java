@@ -1,5 +1,6 @@
 package com.tamayo.back.services;
 
+import java.sql.Timestamp;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -7,62 +8,76 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tamayo.back.model.Location;
+import com.tamayo.back.model.Productcategory;
 import com.tamayo.back.model.Productsubcategory;
 import com.tamayo.back.repositories.ProductSubCategoryRepository;
 
 @Service
-public class ProductSubcategoryServiceImpl  implements ProductSubCategoryService {
+public class ProductSubcategoryServiceImpl {
 	
 	private ProductSubCategoryRepository productSubcategoryRepository;
 
-	@Autowired
+	
 	public ProductSubcategoryServiceImpl(ProductSubCategoryRepository productSubcategoryRepository) {
-		super();
 		this.productSubcategoryRepository = productSubcategoryRepository;
 	}
 	
-	@Override
 	public Productsubcategory saveProductSubcategory(Productsubcategory productSubcategory) {
-		if(productSubcategory == null)
-			return null;
 		return productSubcategoryRepository.save(productSubcategory);
 	}
 	
-	@Override
-	@Transactional
-	public Productsubcategory updateProductSubcategory(Productsubcategory productsubcategory) {
-		if(productsubcategory == null)
-			return null;
-		Productsubcategory ps = productSubcategoryRepository.findById(productsubcategory.getProductsubcategoryid()).get();
-		ps.setName(productsubcategory.getName());
-		ps.setRowguid(productsubcategory.getRowguid());
-		ps.setModifieddate(productsubcategory.getModifieddate());
-		return productsubcategory;
+	public Iterable<Productsubcategory> saveAll(Iterable<Productsubcategory> prosubcats){
+		for(Productsubcategory x:prosubcats) {
+			saveProductSubcategory(x);
+		}
+		return prosubcats;
 	}
 	
-	@Override
-	public boolean existsById(Integer id) {
-		return productSubcategoryRepository.existsById(id);
-	}
-
-	@Override
-	public Iterable<Productsubcategory> findAll() {
-		return productSubcategoryRepository.findAll();
-	}
-
-	@Override
-	public Productsubcategory saveStateprovince(Productsubcategory prodsubcat) {
-		return productSubcategoryRepository.save(prodsubcat);
-	}
-
-	@Override
 	public Optional<Productsubcategory> findById(Integer id) {
 		return productSubcategoryRepository.findById(id);
 	}
-
-	@Override
-	public void delete(Productsubcategory prodsubcat) {
-		productSubcategoryRepository.delete(prodsubcat);
+	
+	public boolean existsById(Integer id) {
+		return productSubcategoryRepository.existsById(id);
 	}
+	
+	public Iterable<Productsubcategory> findAll() {
+		return productSubcategoryRepository.findAll();
+	}
+	
+	public Iterable<Productsubcategory> findAllById(Iterable<Productsubcategory> ids) {
+		return null;
+	}
+	
+	public long count() {
+		return productSubcategoryRepository.count();
+	}
+	
+	public void deleteById(Integer id) {
+		productSubcategoryRepository.deleteById(id);
+	}
+	
+	public void delete(Productsubcategory prodsubcat) {
+		deleteById(prodsubcat.getProductsubcategoryid());
+	}
+	
+	public void deleteAll(Iterable<Productsubcategory> prodsubcats) {
+		productSubcategoryRepository.deleteAll(prodsubcats);
+	}
+	
+	public void deleteAll() {
+		productSubcategoryRepository.deleteAll();
+	}
+	
+	public void editProductsubcategory(Integer id, Productcategory pc, String name) {
+		Productsubcategory psc = findById(id).get();
+		psc.setModifieddate(new Timestamp(System.currentTimeMillis()));
+		psc.setName(name);
+		psc.setProductcategory(pc);
+		productSubcategoryRepository.save(psc);
+	}
+
+	
 	
 }

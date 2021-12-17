@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tamayo.back.daos.ProductsubcategoryDao;
 import com.tamayo.back.model.Productsubcategory;
+import com.tamayo.back.repositories.ProductSubCategoryRepository;
 
 
 @RestController
@@ -21,31 +22,31 @@ import com.tamayo.back.model.Productsubcategory;
 public class ProductsubcategoryRestControllerImpl {
 
 	@Autowired
-	ProductsubcategoryDao productsubcategoryDao;
+	ProductSubCategoryRepository productsubcategoryRepo;
 	
 	@GetMapping
-    public List<Productsubcategory> getProductsubcategories() {
-        return productsubcategoryDao.getAll();
+    public Iterable<Productsubcategory> getProductsubcategories() {
+        return productsubcategoryRepo.findAll();
     }
 	
 	@GetMapping("/{id}")
 	public Productsubcategory getbyId(@PathVariable("id") Integer id) {
-		return productsubcategoryDao.get(id).orElseThrow(() -> new IllegalArgumentException("Invalid id"));
+		return productsubcategoryRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid id"));
 	}
 	
 	@PostMapping
 	public void addProductsubcategory(@RequestBody Productsubcategory productsubcategory) {
-		productsubcategoryDao.save(productsubcategory);
+		productsubcategoryRepo.save(productsubcategory);
 	}
 	
 	@PutMapping
 	public void updateProductsubcategory(@RequestBody Productsubcategory productsubcategory) {
-		productsubcategoryDao.update(productsubcategory);
+		productsubcategoryRepo.save(productsubcategory);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Integer id) {
-		productsubcategoryDao.deleteById(id);
+		productsubcategoryRepo.deleteById(id);
 	}
 	
 }
