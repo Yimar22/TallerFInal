@@ -6,6 +6,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.tamayo.back.model.UserType;
+
+
+
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -14,23 +18,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().authorizeRequests()
-		.antMatchers("/trigerrs/**").access("hasRole('administrador')")
-		.antMatchers("/trigertypes/**").access("hasRole('administrador')")
-		.antMatchers("/autotransitions/**").access("hasRole('operador')")
-		.antMatchers("/userselects/**").access("hasRole('operador')")
-		.antMatchers("/trigerrs/**").access("hasRole('operador')")
-		.anyRequest().authenticated()
-		.and()
-			.formLogin()
-			.permitAll()
-		.and()
-			.logout()
-			.invalidateHttpSession(true).clearAuthentication(true)
-			.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")				
-			.permitAll()
-		.and()
-		.exceptionHandling()
-			.accessDeniedHandler(accessDeniedHandler);
+
+		
+		httpSecurity//.userDetailsService(myCustomUserDetailsService)
+		.formLogin()
+		.loginPage("/login").permitAll()
+		.and().authorizeRequests()
+		.antMatchers("/auts/**")
+		.hasRole(UserType.ADMINISTRATOR.toString())
+		.antMatchers("/pres/**", "/thrs/**", "/locs/**")
+		.hasRole(UserType.OPERATOR.toString())
+		.anyRequest().authenticated().and()
+		.httpBasic().and().logout().invalidateHttpSession(true)
+		.clearAuthentication(true)
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling()
+		.accessDeniedHandler(accessDeniedHandler);
 	}
 }

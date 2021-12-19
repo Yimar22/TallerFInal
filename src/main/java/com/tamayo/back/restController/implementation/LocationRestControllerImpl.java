@@ -14,11 +14,12 @@ import com.tamayo.back.model.Location;
 import com.tamayo.back.repositories.LocationRepository;
 
 @RestController
-@RequestMapping("/api-rest/locations")
+@RequestMapping("/locations")
 public class LocationRestControllerImpl {
 	
 	@Autowired
 	private LocationRepository locRepo;
+	
 	
 
 	@GetMapping

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,14 +13,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import com.tamayo.back.model.UserType;
-import com.tamayo.back.model.Userr;
 import com.tamayo.back.model.Workorder;
 import com.tamayo.back.model.Workorderrouting;
 import com.tamayo.back.services.LocationServiceImpl;
 import com.tamayo.back.services.ProductServiceImp;
 import com.tamayo.back.services.ProductSubcategoryServiceImpl;
 import com.tamayo.back.services.UnitMeasureServiceImpl;
-import com.tamayo.back.services.UserServiceImp;
+import com.tamayo.back.services.UserService;
 import com.tamayo.back.services.WorkorderServiceImpl;
 import com.tamayo.back.services.WorkorderroutingServiceImpl;
 import com.tamayo.back.model.Location;
@@ -29,11 +27,11 @@ import com.tamayo.back.model.Product;
 import com.tamayo.back.model.Productcategory;
 import com.tamayo.back.model.Productsubcategory;
 import com.tamayo.back.model.Unitmeasure;
+import com.tamayo.back.model.UserApp;
 
 
 @SpringBootApplication
-@ComponentScan("com.tamayo")
-@EntityScan("com.tamayo")
+@ComponentScan(basePackages="com.tamayo.*")
 @EnableJpaRepositories("com.tamayo.back.repositories")
 public class TallerFinalApplication {
 	
@@ -55,7 +53,7 @@ public class TallerFinalApplication {
 	private static WorkorderroutingServiceImpl wors;
 	private static int wor1;
 	private static int wor2;
-	private static UserServiceImp us;
+	private static UserService us;
 	
 	
 	
@@ -73,7 +71,7 @@ public class TallerFinalApplication {
 		wos = context.getBean(WorkorderServiceImpl.class);
 		ls = context.getBean(LocationServiceImpl.class);
 		wors = context.getBean(WorkorderroutingServiceImpl.class);
-		us = context.getBean(UserServiceImp.class);
+		us = context.getBean(UserService.class);
 		
 		
 		setDefaultSubcategories(context);
@@ -82,7 +80,7 @@ public class TallerFinalApplication {
 		setDefaultWorkorders(context);
 		setDefaultLocations(context);
 		setDefaultWorkorderroutings(context);
-		setUsers(context);
+		setUsers();
 	}
 	
 	private static void setDefaultLocations(ConfigurableApplicationContext context) {
@@ -157,18 +155,10 @@ public class TallerFinalApplication {
 		wo2=wos.saveWorkorder(wo).getWorkorderid();
 	}
 
-	private static void setUsers(ConfigurableApplicationContext context) {
-		Userr u = new Userr();
-		u.setUserId(1);
-		u.setUserName("YimarT");
-		u.setUserPassword("0000");
-		u.setUsertype(UserType.administrador);
+	private static void setUsers() {
+		UserApp u = new UserApp(1,"sacn","{noop}12345", UserType.ADMINISTRATOR);
 		us.save(u);
-		Userr v = new Userr();
-		v.setUserId(2);
-		v.setUserName("ausar");
-		v.setUserPassword("0001");
-		v.setUsertype(UserType.operador);
+		UserApp v = new UserApp(2,"ausar","{noop}00000", UserType.OPERATOR);
 		us.save(v);
 		
 	}

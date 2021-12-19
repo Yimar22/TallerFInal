@@ -2,14 +2,20 @@ package com.tamayo.back.services;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
+import com.tamayo.back.model.UserApp;
 import com.tamayo.back.model.UserType;
-import com.tamayo.back.model.Userr;
 
-
+@Service
 public interface UserService {
-	public Userr save(Userr userr);
-	public Optional<Userr> findById(long id);	
-	public Iterable<Userr> findAll();
-	public void delete(Userr user);
+	public UserApp save(UserApp user);
+
+	public Optional<UserApp> findById(long id);
+
+	public Iterable<UserApp> findAll();
+
+	public void delete(UserApp user);
+
 	public UserType[] getTypes();
 }
